@@ -13,32 +13,35 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText 
 
   useEffect(() => {
     setHeaderTheme('dark')
-  })
+  }, [setHeaderTheme])
 
   return (
     <div
-      className="relative -mt-[10.4rem] flex items-center justify-center text-white"
+      className="relative"
       data-theme="dark"
     >
-      <div className="container mb-8 z-10 relative flex items-center justify-center">
-        <div className="max-w-[36.5rem] md:text-center">
-          {richText && <RichText className="mb-6" data={richText} enableGutter={false} />}
-          {Array.isArray(links) && links.length > 0 && (
-            <ul className="flex md:justify-center gap-4">
-              {links.map(({ link }, i) => {
-                return (
-                  <li key={i}>
-                    <CMSLink {...link} />
-                  </li>
-                )
-              })}
-            </ul>
-          )}
+      <div className="absolute top-0 left-0 w-full h-full">
+        <div className="flex container flex-col justify-end items-start h-screen pb-16">
+          <div className="max-w-2xl z-10">
+
+            {richText && <RichText data={richText} enableGutter={false} />}
+            {Array.isArray(links) && links.length > 0 && (
+              <ul className="flex gap-4 flex-col md:flex-row">
+                {links.map(({ link }, i) => {
+                  return (
+                    <li key={i}>
+                      <CMSLink {...link} />
+                    </li>
+                  )
+                })}
+              </ul>
+            )}
+          </div>
         </div>
       </div>
-      <div className="min-h-[80vh] select-none">
+      <div className="select-none min-h-screen w-full overflow-hidden">
         {media && typeof media === 'object' && (
-          <Media fill imgClassName="-z-10 object-cover" priority resource={media} />
+          <Media className='h-full' fill videoClassName='object-cover h-full w-full' imgClassName="object-cover" priority resource={media} />
         )}
       </div>
     </div>
