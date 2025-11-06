@@ -100,7 +100,7 @@
 
   /* Firebase Typography Scale */
   h1, h1 * {
-    @apply text-4xl md:text-5xl font-bold leading-9;
+    @apply text-4xl md:text-5xl font-bold;
   }
   .richtext h1 > * {
     @apply leading-3

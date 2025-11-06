@@ -42,7 +42,7 @@ export default function FeatureComponent(
         image
       )
   return (
-    <section className="py-16">
+    <section className="py-16 bg-muted/30">
       <div className={"container"}>
         <div
           className={cn(
@@ -75,7 +75,6 @@ export default function FeatureComponent(
             {buttonText && (
             <Button
               variant="outline"
-              size="lg"
               onClick={() => {}}
               className="w-full md:w-auto tracking-widest"
             >
@@ -85,7 +84,7 @@ export default function FeatureComponent(
           </div>
 
           {/* Image Section */}
-          <div className={cn("w-full h-96 md:h-full rounded-lg overflow-hidden shadow-lg", isReverse && "md:order-1")}>
+          <div className={cn("w-full h-96 md:h-full rounded-3xl overflow-hidden shadow-lg", isReverse && "md:order-1")}>
             {imageNode}
           </div>
         </div>

@@ -1,13 +1,10 @@
 import type { Metadata } from 'next'
 
 import { cn } from '@/utilities/ui'
-import { GeistMono } from 'geist/font/mono'
-import { GeistSans } from 'geist/font/sans'
 import React from 'react'
 
-import { AdminBar } from '@/components/AdminBar'
+// import { AdminBar } from '@/components/AdminBar'
 import { Footer } from '@/Footer/Component'
-import { Header } from '@/Header/Component'
 import { Providers } from '@/providers'
 import { InitTheme } from '@/providers/Theme/InitTheme'
 import { mergeOpenGraph } from '@/utilities/mergeOpenGraph'
@@ -18,6 +15,10 @@ import { getServerSideURL } from '@/utilities/getURL'
 import { geistMono, googleSans } from './fonts'
 import ProductsBlock from '@/blocks/Products/Component'
 import FeatureComponent from '@/blocks/Feature/Component'
+import ComparisonStepper from '@/blocks/SymmetricStepper/Component'
+import { PricingBlock } from '@/blocks/Pricing/Component'
+import { Header } from '@/components/Header/Index'
+import TestimonialsBlock from '@/blocks/Testimonials/Component'
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const { isEnabled } = await draftMode()
@@ -37,7 +38,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             }}
           /> */}
 
-          <div className='absolute top-0 left-0 right-0 bg-background'>
+          <div className='fixed top-0 left-0 right-0 bg-background z-10'>
             <Header />
           </div>
           {children}
@@ -65,6 +66,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             direction="reverse"
             className="bg-gray-95"
           />
+          <ComparisonStepper/>
+          <PricingBlock/>
+          {/* <TestimonialsBlock/> */}
           <Footer />
         </Providers>
       </body>

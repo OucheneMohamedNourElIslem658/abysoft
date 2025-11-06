@@ -1,48 +1,39 @@
-import { cn } from '@/utilities/ui'
-import * as React from 'react'
+import type * as React from "react"
 
-const Card: React.FC<
-  { ref?: React.Ref<HTMLDivElement> } & React.HTMLAttributes<HTMLDivElement>
-> = ({ className, ref, ...props }) => (
-  <div
-    className={cn('rounded-lg border bg-card text-card-foreground shadow-sm', className)}
-    ref={ref}
-    {...props}
-  />
-)
+import { cn } from "@/utilities/ui"
 
-const CardHeader: React.FC<
-  { ref?: React.Ref<HTMLDivElement> } & React.HTMLAttributes<HTMLDivElement>
-> = ({ className, ref, ...props }) => (
-  <div className={cn('flex flex-col space-y-1.5 p-6', className)} ref={ref} {...props} />
-)
+function Card({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="card"
+      className={cn("bg-muted/90 text-card-foreground rounded-3xl border-border shadow-sm", className)}
+      {...props}
+    />
+  )
+}
 
-const CardTitle: React.FC<
-  { ref?: React.Ref<HTMLHeadingElement> } & React.HTMLAttributes<HTMLHeadingElement>
-> = ({ className, ref, ...props }) => (
-  <h3
-    className={cn('text-2xl font-semibold leading-none tracking-tight', className)}
-    ref={ref}
-    {...props}
-  />
-)
+function CardHeader({ className, ...props }: React.ComponentProps<"div">) {
+  return <div data-slot="card-header" className={cn("flex flex-col gap-1.5 p-6", className)} {...props} />
+}
 
-const CardDescription: React.FC<
-  { ref?: React.Ref<HTMLParagraphElement> } & React.HTMLAttributes<HTMLParagraphElement>
-> = ({ className, ref, ...props }) => (
-  <p className={cn('text-sm text-muted-foreground', className)} ref={ref} {...props} />
-)
+function CardTitle({ className, ...props }: React.ComponentProps<"div">) {
+  return <div data-slot="card-title" className={cn("font-semibold leading-tight", className)} {...props} />
+}
 
-const CardContent: React.FC<
-  { ref?: React.Ref<HTMLDivElement> } & React.HTMLAttributes<HTMLDivElement>
-> = ({ className, ref, ...props }) => (
-  <div className={cn('p-6 pt-0', className)} ref={ref} {...props} />
-)
+function CardDescription({ className, ...props }: React.ComponentProps<"div">) {
+  return <div data-slot="card-description" className={cn("text-sm text-muted-foreground", className)} {...props} />
+}
 
-const CardFooter: React.FC<
-  { ref?: React.Ref<HTMLDivElement> } & React.HTMLAttributes<HTMLDivElement>
-> = ({ className, ref, ...props }) => (
-  <div className={cn('flex items-center p-6 pt-0', className)} ref={ref} {...props} />
-)
+function CardAction({ className, ...props }: React.ComponentProps<"div">) {
+  return <div data-slot="card-action" className={cn("flex items-center", className)} {...props} />
+}
 
-export { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
+function CardContent({ className, ...props }: React.ComponentProps<"div">) {
+  return <div data-slot="card-content" className={cn("p-6 pt-0", className)} {...props} />
+}
+
+function CardFooter({ className, ...props }: React.ComponentProps<"div">) {
+  return <div data-slot="card-footer" className={cn("flex items-center gap-2 p-6 pt-0", className)} {...props} />
+}
+
+export { Card, CardHeader, CardFooter, CardTitle, CardAction, CardDescription, CardContent }
