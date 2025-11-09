@@ -17,8 +17,10 @@ import ProductsBlock from '@/blocks/Products/Component'
 import FeatureComponent from '@/blocks/Feature/Component'
 import ComparisonStepper from '@/blocks/SymmetricStepper/Component'
 import { PricingBlock } from '@/blocks/Pricing/Component'
-import { Header } from '@/components/Header/Index'
+// import { Header } from '@/components/Header/Index'
 import TestimonialsBlock from '@/blocks/Testimonials/Component'
+// import { HeaderNav } from '@/Header/Nav'
+import { Header } from '@/Header/Component'
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const { isEnabled } = await draftMode()
@@ -38,12 +40,13 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             }}
           /> */}
 
-          <div className='fixed top-0 left-0 right-0 bg-background z-10'>
-            <Header />
+          <div className='fixed top-0 left-0 right-0  z-50 bg-background'>
+            {/* <Header /> */}
+            <Header />  
           </div>
           {children}
           <ProductsBlock/>
-          <FeatureComponent
+          {/* <FeatureComponent
             label="FOR PROFESSIONALS"
             title="Ensure Document Quality"
             description="Maintain the highest standards for your professional documents and communications. Our advanced detection system helps you identify and correct any inconsistencies or issues before publication or submission."
@@ -65,7 +68,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             image="https://cdn.plagramme.com/landing/pages/two-column/students.webp?w=1080&q=75"
             direction="reverse"
             className="bg-gray-95"
-          />
+          /> */}
           <ComparisonStepper/>
           <PricingBlock/>
           {/* <TestimonialsBlock/> */}
