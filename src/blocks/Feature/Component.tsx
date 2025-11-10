@@ -12,13 +12,23 @@ export interface FeatureItem {
   description: string
 }
 
+const colorMap: Record<string, string> = {
+  red: "bg-red-500/10",
+  blue: "bg-blue-500/10",
+  green: "bg-green-500/10",
+  yellow: "bg-yellow-500/10 ",
+  purple: "bg-purple-500/10 ",
+  gray: "bg-gray-500/10 ",
+  transparent: "bg-transparent",
+};
+
 
 export const FeatureBlock: React.FC<FeatureBlockProps> = (section) => {
   // console.log('cl', section)
   const isReverse = section.direction === "rtl"
   
   return (
-    <section className="py-16 bg-blue-500/10">
+    <section className={cn("py-16", colorMap[section.bgColor] || "bg-transparent")}>
       <div className={"container"}>
         <div
           className={cn(

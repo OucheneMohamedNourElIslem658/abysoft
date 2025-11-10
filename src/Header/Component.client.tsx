@@ -144,7 +144,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
             {data.navigation.map((item, idx) =>
               item.type === 'dropdown' ? (
                 <NavigationMenuItem key={idx}>
-                  <NavigationMenuTrigger className="text-sm font-medium !bg-inherit">{item.title}</NavigationMenuTrigger>
+                  <NavigationMenuTrigger className="text-sm focus:text-secondary hover:text-secondary font-medium !bg-inherit">{item.title}</NavigationMenuTrigger>
                   <NavigationMenuContent className="flex flex-col gap-1 p-2 min-w-[220px]">
                     {item.links && item.links.map(l => l.link).map((link, i) => (
                       <CMSLink className="px-4 py-3 rounded-md text-sm font-medium transition-colors hover:bg-secondary/10 hover:text-secondary" key={i} {...link} />

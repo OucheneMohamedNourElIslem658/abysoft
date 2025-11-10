@@ -17,16 +17,16 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText 
 
   return (
     <div
-      className="relative h-screen -z-10"
+      className="relative h-screen"
       // data-theme="dark"
     >
-      <div className="absolute bottom-0 left-0 w-full h-full">
+      <div className="absolute bottom-0 left-0 w-full h-full z-10 bg-[#00000080]">
         <div className="flex container h-full mt-auto flex-col justify-end items-start pb-10">
-          <div className="max-w-2xl">
+          <div className="max-w-3xl">
 
-            {richText && <RichText data={richText} enableGutter={false} />}
+            {richText && <RichText className='text-white' data={richText} enableGutter={false} />}
             {Array.isArray(links) && links.length > 0 && (
-              <ul className="flex gap-4 flex-col md:flex-row">
+              <ul className="flex gap-4 flex-col md:flex-row mt-6">
                 {links.map(({ link }, i) => {
                   return (
                     <li key={i}>
@@ -39,9 +39,9 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText 
           </div>
         </div>
       </div>
-        {media && typeof media === 'object' && (
-          <Media className='h-full' fill videoClassName='object-cover h-full w-full' imgClassName="object-cover w-full h-full" priority resource={media} />
-        )}
+      {media && typeof media === 'object' && (
+        <Media className='h-full -z-10' fill videoClassName='object-cover h-full w-full' imgClassName="object-cover w-full h-full" priority resource={media} />
+      )}
     </div>
   )
 }
