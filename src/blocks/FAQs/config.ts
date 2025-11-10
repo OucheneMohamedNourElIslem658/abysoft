@@ -1,81 +1,17 @@
+import { headerField } from "@/fields/headerField";
 import { 
   FixedToolbarFeature, 
   HeadingFeature, 
   InlineToolbarFeature, 
   lexicalEditor 
 } from "@payloadcms/richtext-lexical";
-import { Block, Field } from "payload";
-
-const headerBlock: Field = {
-  name: "header",
-  type: "group",
-  label: "Header",
-  fields: [
-    {
-      name: "span",
-      type: "blocks",
-      label: "Span",
-      required: false,
-      maxRows: 1,
-      admin: {
-        description: "Optional text to appear above the title",
-      },
-      blocks: [
-        {
-
-          slug: "highlight",
-          fields: [
-            {
-              name: "text",
-              type: "text",
-              required: true,
-              label: "Text",
-            }, 
-            {
-              name: "apperance",
-              type: "select",
-              required: true,
-              label: "Apperance",
-              options: ["blue", "red", "green", "yellow", "purple"],
-            }
-          ]
-        },
-        {
-          slug: "relation",
-          fields: [
-            {
-              name: "relation",
-              type: "relationship",
-              required: true,
-              label: "Relation",
-              hasMany: true,
-              relationTo: ["categories", "users"],
-            }
-          ]
-        }
-      ]
-
-    },
-    {
-      name: "title",
-      type: "text",
-      label: "Section Title",
-      required: true,
-    },
-    // {
-    //   name: "description",
-    //   type: "text",
-    //   label: "Description",
-    //   required: true,
-    // }
-  ],
-}
+import { Block } from "payload";
 
 export const Faqs: Block = {
   slug: "faqs",
   interfaceName: "FaqsBlock",
   fields: [
-    headerBlock,
+    headerField,
     {
       name: "faqs",
       type: "array",

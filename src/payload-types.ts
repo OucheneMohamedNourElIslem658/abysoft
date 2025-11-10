@@ -199,7 +199,176 @@ export interface Page {
       | null;
     media?: (number | null) | Media;
   };
-  layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock | FaqsBlock)[];
+  layout: (
+    | CallToActionBlock
+    | ContentBlock
+    | MediaBlock
+    | ArchiveBlock
+    | FormBlock
+    | FaqsBlock
+    | {
+        image?: (number | null) | Media;
+        direction?: ('ltr' | 'rtl') | null;
+        label: string;
+        title: string;
+        paragraph: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
+        /**
+         * Add a button or link for this section
+         */
+        button: {
+          link: {
+            type?: ('reference' | 'custom') | null;
+            newTab?: boolean | null;
+            reference?:
+              | ({
+                  relationTo: 'pages';
+                  value: number | Page;
+                } | null)
+              | ({
+                  relationTo: 'posts';
+                  value: number | Post;
+                } | null);
+            url?: string | null;
+            label: string;
+            /**
+             * Choose how the link should be rendered.
+             */
+            appearance?: ('default' | 'outline') | null;
+          };
+        };
+        bgColor?: ('red' | 'blue' | 'yellow' | 'green' | 'purple' | 'gray' | 'transparent') | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'section';
+      }
+    | {
+        header: {
+          /**
+           * Optional text to appear above the title
+           */
+          span?:
+            | (
+                | {
+                    text: string;
+                    apperance: 'blue' | 'red' | 'green' | 'yellow' | 'purple';
+                    id?: string | null;
+                    blockName?: string | null;
+                    blockType: 'highlight';
+                  }
+                | {
+                    relation: (
+                      | {
+                          relationTo: 'categories';
+                          value: number | Category;
+                        }
+                      | {
+                          relationTo: 'users';
+                          value: number | User;
+                        }
+                    )[];
+                    id?: string | null;
+                    blockName?: string | null;
+                    blockType: 'relation';
+                  }
+              )[]
+            | null;
+          title: string;
+        };
+        tabs?:
+          | {
+              name: string;
+              contentType?: ('richText' | 'blocks') | null;
+              richTextContent?: {
+                root: {
+                  type: string;
+                  children: {
+                    type: any;
+                    version: number;
+                    [k: string]: unknown;
+                  }[];
+                  direction: ('ltr' | 'rtl') | null;
+                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                  indent: number;
+                  version: number;
+                };
+                [k: string]: unknown;
+              } | null;
+              blocksContent?:
+                | (
+                    | {
+                        image?: (number | null) | Media;
+                        direction?: ('ltr' | 'rtl') | null;
+                        label: string;
+                        title: string;
+                        paragraph: {
+                          root: {
+                            type: string;
+                            children: {
+                              type: any;
+                              version: number;
+                              [k: string]: unknown;
+                            }[];
+                            direction: ('ltr' | 'rtl') | null;
+                            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                            indent: number;
+                            version: number;
+                          };
+                          [k: string]: unknown;
+                        };
+                        /**
+                         * Add a button or link for this section
+                         */
+                        button: {
+                          link: {
+                            type?: ('reference' | 'custom') | null;
+                            newTab?: boolean | null;
+                            reference?:
+                              | ({
+                                  relationTo: 'pages';
+                                  value: number | Page;
+                                } | null)
+                              | ({
+                                  relationTo: 'posts';
+                                  value: number | Post;
+                                } | null);
+                            url?: string | null;
+                            label: string;
+                            /**
+                             * Choose how the link should be rendered.
+                             */
+                            appearance?: ('default' | 'outline') | null;
+                          };
+                        };
+                        bgColor?: ('red' | 'blue' | 'yellow' | 'green' | 'purple' | 'gray' | 'transparent') | null;
+                        id?: string | null;
+                        blockName?: string | null;
+                        blockType: 'section';
+                      }
+                    | FaqsBlock
+                  )[]
+                | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'tabs';
+      }
+  )[];
   meta?: {
     title?: string | null;
     /**
@@ -275,21 +444,6 @@ export interface Post {
 export interface Media {
   id: number;
   alt?: string | null;
-  caption?: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
   folder?: (number | null) | FolderInterface;
   updatedAt: string;
   createdAt: string;
@@ -1149,6 +1303,101 @@ export interface PagesSelect<T extends boolean = true> {
         archive?: T | ArchiveBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
         faqs?: T | FaqsBlockSelect<T>;
+        section?:
+          | T
+          | {
+              image?: T;
+              direction?: T;
+              label?: T;
+              title?: T;
+              paragraph?: T;
+              button?:
+                | T
+                | {
+                    link?:
+                      | T
+                      | {
+                          type?: T;
+                          newTab?: T;
+                          reference?: T;
+                          url?: T;
+                          label?: T;
+                          appearance?: T;
+                        };
+                  };
+              bgColor?: T;
+              id?: T;
+              blockName?: T;
+            };
+        tabs?:
+          | T
+          | {
+              header?:
+                | T
+                | {
+                    span?:
+                      | T
+                      | {
+                          highlight?:
+                            | T
+                            | {
+                                text?: T;
+                                apperance?: T;
+                                id?: T;
+                                blockName?: T;
+                              };
+                          relation?:
+                            | T
+                            | {
+                                relation?: T;
+                                id?: T;
+                                blockName?: T;
+                              };
+                        };
+                    title?: T;
+                  };
+              tabs?:
+                | T
+                | {
+                    name?: T;
+                    contentType?: T;
+                    richTextContent?: T;
+                    blocksContent?:
+                      | T
+                      | {
+                          section?:
+                            | T
+                            | {
+                                image?: T;
+                                direction?: T;
+                                label?: T;
+                                title?: T;
+                                paragraph?: T;
+                                button?:
+                                  | T
+                                  | {
+                                      link?:
+                                        | T
+                                        | {
+                                            type?: T;
+                                            newTab?: T;
+                                            reference?: T;
+                                            url?: T;
+                                            label?: T;
+                                            appearance?: T;
+                                          };
+                                    };
+                                bgColor?: T;
+                                id?: T;
+                                blockName?: T;
+                              };
+                          faqs?: T | FaqsBlockSelect<T>;
+                        };
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
       };
   meta?:
     | T
@@ -1324,7 +1573,6 @@ export interface PostsSelect<T extends boolean = true> {
  */
 export interface MediaSelect<T extends boolean = true> {
   alt?: T;
-  caption?: T;
   folder?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -1736,26 +1984,32 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  */
 export interface Header {
   id: number;
-  navItems?:
-    | {
-        link: {
-          type?: ('reference' | 'custom') | null;
-          newTab?: boolean | null;
-          reference?:
-            | ({
-                relationTo: 'pages';
-                value: number | Page;
-              } | null)
-            | ({
-                relationTo: 'posts';
-                value: number | Post;
-              } | null);
-          url?: string | null;
-          label: string;
-        };
-        id?: string | null;
-      }[]
-    | null;
+  logo: number | Media;
+  navigation: {
+    type?: ('link' | 'dropdown') | null;
+    title?: string | null;
+    links?:
+      | {
+          link: {
+            type?: ('reference' | 'custom') | null;
+            newTab?: boolean | null;
+            reference?:
+              | ({
+                  relationTo: 'pages';
+                  value: number | Page;
+                } | null)
+              | ({
+                  relationTo: 'posts';
+                  value: number | Post;
+                } | null);
+            url?: string | null;
+            label: string;
+          };
+          id?: string | null;
+        }[]
+      | null;
+    id?: string | null;
+  }[];
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1765,26 +2019,31 @@ export interface Header {
  */
 export interface Footer {
   id: number;
-  navItems?:
-    | {
-        link: {
-          type?: ('reference' | 'custom') | null;
-          newTab?: boolean | null;
-          reference?:
-            | ({
-                relationTo: 'pages';
-                value: number | Page;
-              } | null)
-            | ({
-                relationTo: 'posts';
-                value: number | Post;
-              } | null);
-          url?: string | null;
-          label: string;
-        };
-        id?: string | null;
-      }[]
-    | null;
+  logo: number | Media;
+  navigation: {
+    title: string;
+    links?:
+      | {
+          link: {
+            type?: ('reference' | 'custom') | null;
+            newTab?: boolean | null;
+            reference?:
+              | ({
+                  relationTo: 'pages';
+                  value: number | Page;
+                } | null)
+              | ({
+                  relationTo: 'posts';
+                  value: number | Post;
+                } | null);
+            url?: string | null;
+            label: string;
+          };
+          id?: string | null;
+        }[]
+      | null;
+    id?: string | null;
+  }[];
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1793,17 +2052,25 @@ export interface Footer {
  * via the `definition` "header_select".
  */
 export interface HeaderSelect<T extends boolean = true> {
-  navItems?:
+  logo?: T;
+  navigation?:
     | T
     | {
-        link?:
+        type?: T;
+        title?: T;
+        links?:
           | T
           | {
-              type?: T;
-              newTab?: T;
-              reference?: T;
-              url?: T;
-              label?: T;
+              link?:
+                | T
+                | {
+                    type?: T;
+                    newTab?: T;
+                    reference?: T;
+                    url?: T;
+                    label?: T;
+                  };
+              id?: T;
             };
         id?: T;
       };
@@ -1816,17 +2083,24 @@ export interface HeaderSelect<T extends boolean = true> {
  * via the `definition` "footer_select".
  */
 export interface FooterSelect<T extends boolean = true> {
-  navItems?:
+  logo?: T;
+  navigation?:
     | T
     | {
-        link?:
+        title?: T;
+        links?:
           | T
           | {
-              type?: T;
-              newTab?: T;
-              reference?: T;
-              url?: T;
-              label?: T;
+              link?:
+                | T
+                | {
+                    type?: T;
+                    newTab?: T;
+                    reference?: T;
+                    url?: T;
+                    label?: T;
+                  };
+              id?: T;
             };
         id?: T;
       };
