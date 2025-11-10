@@ -1,0 +1,1 @@
+export type LocaleType = 'all' | 'en' | 'fr' | 'ar' | undefined;

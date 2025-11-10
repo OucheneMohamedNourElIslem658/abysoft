@@ -3,29 +3,34 @@ import type { Metadata } from 'next'
 import { cn } from '@/utilities/ui'
 import React from 'react'
 
-// import { AdminBar } from '@/components/AdminBar'
 import { Footer } from '@/Footer/Component'
 import { Providers } from '@/providers'
 import { InitTheme } from '@/providers/Theme/InitTheme'
 import { mergeOpenGraph } from '@/utilities/mergeOpenGraph'
-import { draftMode } from 'next/headers'
 
 import './globals.css'
 import { getServerSideURL } from '@/utilities/getURL'
 import { geistMono, googleSans } from './fonts'
 import ComparisonStepper from '@/blocks/SymmetricStepper/Component'
 import { PricingBlock } from '@/blocks/Pricing/Component'
-// import { Header } from '@/components/Header/Index'
 import TestimonialsBlock from '@/blocks/Testimonials/Component'
-// import { HeaderNav } from '@/Header/Nav'
 import { Header } from '@/Header/Component'
-import {TabsBlock} from '@/blocks/Products/Component'
+import { LocaleType } from '@/utilities/types'
 
-export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const { isEnabled } = await draftMode()
+interface Args {
+  children: React.ReactNode,
+  params: Promise<{
+    lang: LocaleType
+  }>
+}
+  
+    
 
+export default async function RootLayout({ params, children }: Args) {
+ 
+  const { lang } = await params
   return (
-    <html className={cn(googleSans.variable, geistMono.variable)} lang="en" suppressHydrationWarning>
+    <html className={cn(googleSans.variable, geistMono.variable)} lang={lang} suppressHydrationWarning>
       <head>
         <InitTheme />
         <link href="/favicon.ico" rel="icon" sizes="32x32" />
@@ -33,20 +38,14 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       </head>
       <body>
         <Providers>
-          {/* <AdminBar
-            adminBarProps={{
-              preview: isEnabled,
-            }}
-          /> */}
-
+          
           <div className='fixed top-0 left-0 right-0  z-50 bg-background'>
             <Header />  
           </div>
           {children}
-          {/* <TabsBlock/> */}
-          <ComparisonStepper/>
+          {/* <ComparisonStepper/>
           <PricingBlock/>
-          <TestimonialsBlock/>
+          <TestimonialsBlock/> */}
           <Footer />
         </Providers>
       </body>

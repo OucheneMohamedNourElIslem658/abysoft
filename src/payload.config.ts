@@ -73,25 +73,25 @@ export default buildConfig({
     // },
   }),
   collections: [Pages, Posts, Media, Categories, Users],
-//   localization: {
-//     locales: [
-//       {
-//         label: 'English',
-//         code: 'en',
-//       },
-//       {
-//         label: 'Français',
-//         code: 'fr',
-//       },
-//       {
-//         label: 'العربية',
-//         code: 'ar',
-//         rtl: true,
-//       },
-//     ],
-//     defaultLocale: 'en',
-//     fallback: true,
-//   },
+  localization: {
+    locales: [
+      {
+        label: 'English',
+        code: 'en',
+      },
+      {
+        label: 'Français',
+        code: 'fr',
+      },
+      {
+        label: 'العربية',
+        code: 'ar',
+        rtl: true,
+      },
+    ],
+    defaultLocale: 'en',
+    fallback: true,
+  },
   cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer],
   plugins: [
