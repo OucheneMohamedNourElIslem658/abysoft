@@ -1,5 +1,7 @@
 // storage-adapter-import-placeholder
-import { sqliteAdapter } from '@payloadcms/db-sqlite'
+// import { sqliteAdapter } from '@payloadcms/db-sqlite'
+// import { postgresAdapter } from '@payloadcms/db-postgres'
+import { postgresAdapter  } from '@payloadcms/db-postgres'
 
 import sharp from 'sharp' // sharp-import
 import path from 'path'
@@ -16,6 +18,8 @@ import { Header } from './Header/config'
 import { plugins } from './plugins'
 import { defaultLexical } from '@/fields/defaultLexical'
 import { getServerSideURL } from './utilities/getURL'
+
+import { s3Storage } from '@payloadcms/storage-s3'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -59,10 +63,14 @@ export default buildConfig({
   },
   // This config helps us configure global or default features that the other editors can inherit
   editor: defaultLexical,
-  db: sqliteAdapter({
-    client: {
-      url: process.env.DATABASE_URI || '',
-    },
+  db: postgresAdapter ({
+    
+    // client: {
+    pool: {
+
+      connectionString: process.env.DATABASE_URI || '',
+    }
+    // },
   }),
   collections: [Pages, Posts, Media, Categories, Users],
 //   localization: {
@@ -88,6 +96,22 @@ export default buildConfig({
   globals: [Header, Footer],
   plugins: [
     ...plugins,
+    s3Storage({
+      collections: {
+        media: true
+      },
+      
+      bucket: process.env.S3_BUCKET!,
+      config: {
+        forcePathStyle: true, // Important for using Supabase
+        credentials: {
+          accessKeyId: process.env.S3_ACCESS_KEY_ID!,
+          secretAccessKey: process.env.S3_SECRET_ACCESS_KEY!,
+        },
+        region: process.env.S3_REGION!,
+        endpoint: process.env.S3_ENDPOINT!,
+      },
+    })
     // storage-adapter-placeholder
   ],
   secret: process.env.PAYLOAD_SECRET,

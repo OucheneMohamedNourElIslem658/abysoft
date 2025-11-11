@@ -1,19 +1,17 @@
-"use client"
-import React from 'react'
-
 import type { Footer } from '@/payload-types'
-import { useState, useEffect } from "react"
-import { Moon, Sun, Globe } from "lucide-react"
+// import { useState, useEffect } from "react"
+// import { Moon, Sun, Globe } from "lucide-react"
 import Link from 'next/link'
 import { Logo } from '@/components/Logo/Logo'
+import { getCachedGlobal } from '@/utilities/getGlobals'
+import { Media } from '@/components/Media'
+import { CMSLink } from '@/components/Link'
 
-const languages = [
-  { code: "en", name: "English", flag: "🇺🇸" },
-  { code: "es", name: "Español", flag: "🇪🇸" },
-  { code: "fr", name: "Français", flag: "🇫🇷" },
-  { code: "de", name: "Deutsch", flag: "🇩🇪" },
-  { code: "ja", name: "日本語", flag: "🇯🇵" },
-]
+// const languages = [
+//   { code: "en", name: "English", flag: "🇺🇸" },
+//   { code: "ar", name: "العربية", flag: "🇸🇦" },
+//   { code: "fr", name: "Français", flag: "🇫🇷" },
+// ]
 
 const footerLinks = [
   {
@@ -45,42 +43,43 @@ const footerLinks = [
   },
 ]
 
-export function Footer() {
-  // const footerData: Footer = await getCachedGlobal('footer', 1)()
+export async function Footer() {
+  const footerData: Footer = await getCachedGlobal('footer', 1)()
 
   // const navItems = footerData?.navItems || []
+  // console.log('footerData', footerData)
 
-  const [theme, setTheme] = useState<"light" | "dark">("light")
-  const [language, setLanguage] = useState("en")
-  const [showLangMenu, setShowLangMenu] = useState(false)
-  const [mounted, setMounted] = useState(false)
+  // const [theme, setTheme] = useState<"light" | "dark">("light")
+  // const [language, setLanguage] = useState("en")
+  // const [showLangMenu, setShowLangMenu] = useState(false)
+  // const [mounted, setMounted] = useState(false)
 
-  useEffect(() => {
-    setMounted(true)
-    const savedTheme = localStorage.getItem("theme") as "light" | "dark"
-    const savedLang = localStorage.getItem("language") as string
+  // useEffect(() => {
+  //   setMounted(true)
+  //   const savedTheme = localStorage.getItem("theme") as "light" | "dark"
+  //   const savedLang = localStorage.getItem("language") as string
 
-    if (savedTheme) {
-      setTheme(savedTheme)
-      document.documentElement.setAttribute("data-theme", savedTheme)
-    }
-    if (savedLang) {
-      setLanguage(savedLang)
-    }
-  }, [])
+  //   if (savedTheme) {
+  //     setTheme(savedTheme)
+  //     document.documentElement.setAttribute("data-theme", savedTheme)
+  //   }
+  //   if (savedLang) {
+  //     setLanguage(savedLang)
+  //   }
+  // }, [])
 
-  const toggleTheme = () => {
-    const newTheme = theme === "light" ? "dark" : "light"
-    setTheme(newTheme)
-    localStorage.setItem("theme", newTheme)
-    document.documentElement.setAttribute("data-theme", newTheme)
-  }
+  // const toggleTheme = () => {
+  //   const newTheme = theme === "light" ? "dark" : "light"
+  //   setTheme(newTheme)
+  //   localStorage.setItem("theme", newTheme)
+  //   document.documentElement.setAttribute("data-theme", newTheme)
+  // }
 
-  const handleLanguageChange = (code: string) => {
-    setLanguage(code)
-    localStorage.setItem("language", code)
-    setShowLangMenu(false)
-  }
+  // const handleLanguageChange = (code: string) => {
+  //   setLanguage(code)
+  //   localStorage.setItem("language", code)
+  //   setShowLangMenu(false)
+  // }
 
   return (
     // <footer className="mt-auto border-t border-border bg-black dark:bg-card text-white">
@@ -105,20 +104,15 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           <Link href="/">
-            <Logo loading="eager" priority="high" className="invert dark:invert-0" />
+            <Media className='h-12' imgClassName='h-full w-fit' priority resource={footerData.logo} />
           </Link>
-          {footerLinks.map((section) => (
-            <div key={section.title}>
+          {footerData.navigation.map((section, i) => (
+            <div key={i}>
               <h3 className="font-semibold text-foreground mb-4 text-sm uppercase tracking-wide">{section.title}</h3>
               <ul className="space-y-3">
-                {section.links.map((link) => (
-                  <li key={link.label}>
-                    <a
-                      href={link.href}
-                      className="text-muted-foreground hover:text-foreground transition-colors text-sm"
-                    >
-                      {link.label}
-                    </a>
+                {section.links && section.links.map(l => l.link).map((link, i) => (
+                  <li key={i}>
+                    <CMSLink className="text-muted-foreground hover:text-foreground transition-colors text-sm cursor-pointer" {...link} />
                   </li>
                 ))}
               </ul>
@@ -132,11 +126,14 @@ export function Footer() {
         {/* Bottom Section */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
           {/* Left: Copyright */}
-          <p className="text-muted-foreground text-sm">© 2025 Build UI Components. All rights reserved.</p>
+          <p className="text-muted-foreground text-sm">
+            &copy; {new Date().getFullYear()} AbySoft. All rights reserved.
+          </p>
 
           {/* Right: Theme & Language Controls */}
           <div className="flex items-center gap-4">
-            <button
+            lang and theme
+            {/* <button
               onClick={toggleTheme}
               className="inline-flex items-center justify-center gap-2 px-3 py-1.5 rounded-full border border-border bg-muted hover:bg-accent transition-colors text-foreground"
               aria-label="Toggle theme"
@@ -153,10 +150,11 @@ export function Footer() {
                   <span className="text-xs hidden sm:inline">Light</span>
                 </>
               )}
-            </button>
+            </button> */}
 
-            <div className="relative">
-              <button
+            {/* <div className="relative"> */}
+              
+              {/* <button
                 onClick={() => setShowLangMenu(!showLangMenu)}
                 className="inline-flex items-center justify-center gap-2 px-3 py-1.5 rounded-full border border-border bg-muted hover:bg-accent transition-colors text-foreground"
                 aria-label="Change language"
@@ -166,10 +164,9 @@ export function Footer() {
                 <span className="text-xs hidden sm:inline uppercase">
                   {languages.find((l) => l.code === language)?.code}
                 </span>
-              </button>
+              </button> */}
 
-              {/* Language Menu */}
-              {showLangMenu && (
+              {/* {showLangMenu && (
                 <div className="absolute bottom-full right-0 mb-2 w-48 bg-card border border-border rounded-lg shadow-lg z-50">
                   {languages.map((lang) => (
                     <button
@@ -184,8 +181,8 @@ export function Footer() {
                     </button>
                   ))}
                 </div>
-              )}
-            </div>
+              )} */}
+            {/* </div> */}
           </div>
         </div>
       </div>
