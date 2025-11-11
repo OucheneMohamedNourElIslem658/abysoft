@@ -10,6 +10,7 @@ import { MediaBlock } from '@/blocks/MediaBlock/Component'
 import { FaqsBlock } from './FAQs/Component'
 import {FeatureBlock} from './Feature/Component'
 import {TabsBlock} from './Products/Component'
+import {TestimonialsBlock} from './Testimonials/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -20,6 +21,7 @@ const blockComponents = {
   faqs: FaqsBlock,
   section: FeatureBlock,
   tabs: TabsBlock,
+  testimonial: TestimonialsBlock
 }
 
 export const RenderBlocks: React.FC<{

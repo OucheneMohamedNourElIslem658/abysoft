@@ -4,7 +4,7 @@ import Link from 'next/link'
 import React from 'react'
 
 import type { Page, Post } from '@/payload-types'
-import { ArrowRight } from 'lucide-react'
+// import { ArrowRight } from 'lucide-react'
 // import { getLangFromUrl } from '@/utilities/getLangFromUrl'
 
 type CMSLinkType = {

@@ -30,7 +30,7 @@ export default async function RootLayout({ params, children }: Args) {
  
   const { lang } = await params
   return (
-    <html className={cn(googleSans.variable, geistMono.variable)} lang={lang} suppressHydrationWarning>
+    <html className={cn(googleSans.variable, geistMono.variable)} lang={lang} suppressHydrationWarning dir={ lang === 'ar' ? 'rtl' : 'ltr' }>
       <head>
         <InitTheme />
         <link href="/favicon.ico" rel="icon" sizes="32x32" />
