@@ -7,16 +7,25 @@ import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 import React from 'react'
 import PageClient from './page.client'
+import { LocaleType } from '@/utilities/types'
 
 export const dynamic = 'force-static'
 export const revalidate = 600
 
-export default async function Page() {
+type Args = {
+  params: Promise<{
+    lang: LocaleType
+  }>
+}
+
+export default async function Page({params: paramsPromise}: Args) {
+  const { lang } =  await paramsPromise
   const payload = await getPayload({ config: configPromise })
 
   const posts = await payload.find({
     collection: 'posts',
     depth: 1,
+    locale: lang,
     limit: 12,
     overrideAccess: false,
     select: {
@@ -58,6 +67,6 @@ export default async function Page() {
 
 export function generateMetadata(): Metadata {
   return {
-    title: `Payload Website Template Posts`,
+    title: `Abysoft Blog`,
   }
 }
