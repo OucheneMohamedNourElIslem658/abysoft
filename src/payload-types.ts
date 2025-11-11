@@ -72,6 +72,7 @@ export interface Config {
     media: Media;
     categories: Category;
     users: User;
+    testimonials: Testimonial;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -94,6 +95,7 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
+    testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -368,6 +370,7 @@ export interface Page {
         blockName?: string | null;
         blockType: 'tabs';
       }
+    | TestimonialBlock
   )[];
   meta?: {
     title?: string | null;
@@ -996,6 +999,61 @@ export interface FaqsBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TestimonialBlock".
+ */
+export interface TestimonialBlock {
+  header: {
+    /**
+     * Optional text to appear above the title
+     */
+    span?:
+      | (
+          | {
+              text: string;
+              apperance: 'blue' | 'red' | 'green' | 'yellow' | 'purple';
+              id?: string | null;
+              blockName?: string | null;
+              blockType: 'highlight';
+            }
+          | {
+              relation: (
+                | {
+                    relationTo: 'categories';
+                    value: number | Category;
+                  }
+                | {
+                    relationTo: 'users';
+                    value: number | User;
+                  }
+              )[];
+              id?: string | null;
+              blockName?: string | null;
+              blockType: 'relation';
+            }
+        )[]
+      | null;
+    title: string;
+  };
+  testimonials?: (number | Testimonial)[] | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'testimonial';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "testimonials".
+ */
+export interface Testimonial {
+  id: number;
+  name: string;
+  position?: string | null;
+  quote: string;
+  photo?: (number | null) | Media;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1205,6 +1263,10 @@ export interface PayloadLockedDocument {
         value: number | User;
       } | null)
     | ({
+        relationTo: 'testimonials';
+        value: number | Testimonial;
+      } | null)
+    | ({
         relationTo: 'redirects';
         value: number | Redirect;
       } | null)
@@ -1398,6 +1460,7 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        testimonial?: T | TestimonialBlockSelect<T>;
       };
   meta?:
     | T
@@ -1533,6 +1596,39 @@ export interface FaqsBlockSelect<T extends boolean = true> {
         answer?: T;
         id?: T;
       };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TestimonialBlock_select".
+ */
+export interface TestimonialBlockSelect<T extends boolean = true> {
+  header?:
+    | T
+    | {
+        span?:
+          | T
+          | {
+              highlight?:
+                | T
+                | {
+                    text?: T;
+                    apperance?: T;
+                    id?: T;
+                    blockName?: T;
+                  };
+              relation?:
+                | T
+                | {
+                    relation?: T;
+                    id?: T;
+                    blockName?: T;
+                  };
+            };
+        title?: T;
+      };
+  testimonials?: T;
   id?: T;
   blockName?: T;
 }
@@ -1702,6 +1798,18 @@ export interface UsersSelect<T extends boolean = true> {
         createdAt?: T;
         expiresAt?: T;
       };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "testimonials_select".
+ */
+export interface TestimonialsSelect<T extends boolean = true> {
+  name?: T;
+  position?: T;
+  quote?: T;
+  photo?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

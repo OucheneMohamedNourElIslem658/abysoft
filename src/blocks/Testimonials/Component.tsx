@@ -1,6 +1,9 @@
 import Description from "@/components/Description/Index"
+import HeaderField from "@/components/HeaderField"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel"
+import { TestimonialBlock as TestimonialBlockProps } from "@/payload-types"
+import React from "react"
 
 interface ReviewItem {
   id: number
@@ -49,17 +52,19 @@ const reviews: ReviewItem[] = [
   },
 ]
 
-export default function TestimonialsBlock() {
+export const TestimonialsBlock: React.FC<TestimonialBlockProps> = (data) => {
+  console.log('first--------------------------------.')
+  console.dir( data, { depth: null } )
   return (
     <section className="py-16 bg-muted/30">
       <div className="container">
-        <Description
+        {/* <Description
             visible={true}
             showBadge={true}
             badgeLabel='Testimonials'
             clientsText='Discover why our clients love working with us. Read their stories and experiences.'
-        />
-
+        /> */}
+        <HeaderField header={data.header} />
         <Carousel className="mt-20 flex flex-col gap-14 items-center" >
           <CarouselContent>
             {reviews.map((review) => (
