@@ -11,11 +11,11 @@ import { mergeOpenGraph } from '@/utilities/mergeOpenGraph'
 import './globals.css'
 import { getServerSideURL } from '@/utilities/getURL'
 import { geistMono, googleSans } from './fonts'
-import ComparisonStepper from '@/blocks/SymmetricStepper/Component'
-import { PricingBlock } from '@/blocks/Pricing/Component'
-import TestimonialsBlock from '@/blocks/Testimonials/Component'
 import { Header } from '@/Header/Component'
 import { LocaleType } from '@/utilities/types'
+import { TestimonialsBlock } from '@/blocks/Testimonials/Component'
+import UniversitiesBlock from '@/blocks/Universities'
+import { ThemeProvider } from 'next-themes'
 
 interface Args {
   children: React.ReactNode,
@@ -37,17 +37,21 @@ export default async function RootLayout({ params, children }: Args) {
         <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
       </head>
       <body>
-        <Providers>
-          
-          <div className='fixed top-0 left-0 right-0  z-50 bg-background'>
-            <Header />  
-          </div>
-          {children}
-          {/* <ComparisonStepper/>
-          <PricingBlock/>
-          <TestimonialsBlock/> */}
-          <Footer />
-        </Providers>
+        <ThemeProvider attribute="class" defaultTheme="light" storageKey="theme" enableColorScheme={false}>
+          <Providers>
+            
+            <div className='fixed top-0 left-0 right-0  z-50 bg-background'>
+              <Header />  
+            </div>
+            {children}
+            {/* <ComparisonStepper/>
+            <PricingBlock/>
+            <TestimonialsBlock/> */}
+            {/* <TestimonialsBlock /> */}
+            {/* <UniversitiesBlock /> */}
+            <Footer />
+          </Providers>
+        </ThemeProvider>
       </body>
     </html>
   )

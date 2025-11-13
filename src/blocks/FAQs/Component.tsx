@@ -24,8 +24,10 @@ export const FaqsBlock: React.FC<FaqsBlockProps> = ({ faqs, header }) => {
         <Accordion type="single" collapsible className="mt-10">
           {faqs.map((faq, index) => 
             <AccordionItem key={index} value={`item-${index}`}>
-              <AccordionTrigger className="font-geist-mono text-secondary text-lg">{faq.question}</AccordionTrigger>
-              <AccordionContent>
+              <AccordionTrigger className="text-lg font-semibold hover:text-primary transition-colors font-geist-mono data-[state=open]:text-primary text-start">
+                {faq.question}
+              </AccordionTrigger>
+              <AccordionContent className="text-base text-muted-foreground pt-2">
                 <RichText data={faq.answer} enableGutter={false}/>
               </AccordionContent>
             </AccordionItem>

@@ -6,6 +6,7 @@ import { Logo } from '@/components/Logo/Logo'
 import { getCachedGlobal } from '@/utilities/getGlobals'
 import { Media } from '@/components/Media'
 import { CMSLink } from '@/components/Link'
+import { FooterControls } from '@/components/FooterControls/Component'
 
 // const languages = [
 //   { code: "en", name: "English", flag: "🇺🇸" },
@@ -136,7 +137,7 @@ export async function Footer() {
 
           {/* Right: Theme & Language Controls */}
           <div className="flex items-center gap-4">
-            lang and theme
+            <FooterControls />
             {/* <button
               onClick={toggleTheme}
               className="inline-flex items-center justify-center gap-2 px-3 py-1.5 rounded-full border border-border bg-muted hover:bg-accent transition-colors text-foreground"
