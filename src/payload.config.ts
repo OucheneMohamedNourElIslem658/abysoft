@@ -13,6 +13,7 @@ import { Media } from './collections/Media'
 import { Pages } from './collections/Pages'
 import { Posts } from './collections/Posts'
 import { Users } from './collections/Users'
+import { Testimonials } from './collections/Testimonials'
 import { Footer } from './Footer/config'
 import { Header } from './Header/config'
 import { plugins } from './plugins'
@@ -72,26 +73,26 @@ export default buildConfig({
     }
     // },
   }),
-  collections: [Pages, Posts, Media, Categories, Users],
-//   localization: {
-//     locales: [
-//       {
-//         label: 'English',
-//         code: 'en',
-//       },
-//       {
-//         label: 'Français',
-//         code: 'fr',
-//       },
-//       {
-//         label: 'العربية',
-//         code: 'ar',
-//         rtl: true,
-//       },
-//     ],
-//     defaultLocale: 'en',
-//     fallback: true,
-//   },
+  collections: [Pages, Posts, Media, Categories, Users, Testimonials],
+  localization: {
+    locales: [
+      {
+        label: 'English',
+        code: 'en',
+      },
+      {
+        label: 'Français',
+        code: 'fr',
+      },
+      {
+        label: 'العربية',
+        code: 'ar',
+        rtl: true,
+      },
+    ],
+    defaultLocale: 'en',
+    fallback: true,
+  },
   cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer],
   plugins: [

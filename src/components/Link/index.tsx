@@ -4,7 +4,8 @@ import Link from 'next/link'
 import React from 'react'
 
 import type { Page, Post } from '@/payload-types'
-import { ArrowRight } from 'lucide-react'
+// import { ArrowRight } from 'lucide-react'
+// import { getLangFromUrl } from '@/utilities/getLangFromUrl'
 
 type CMSLinkType = {
   appearance?: 'inline' | ButtonProps['variant']
@@ -33,6 +34,8 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
     size: sizeFromProps,
     url,
   } = props
+
+  // const lang = getLangFromUrl()
 
   const href =
     type === 'reference' && typeof reference?.value === 'object' && reference.value.slug

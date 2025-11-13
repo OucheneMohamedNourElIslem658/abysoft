@@ -17,11 +17,11 @@ function CardHeader({ className, ...props }: React.ComponentProps<"div">) {
 }
 
 function CardTitle({ className, ...props }: React.ComponentProps<"div">) {
-  return <div data-slot="card-title" className={cn("font-semibold leading-tight", className)} {...props} />
+  return <div data-slot="card-title" className={cn("font-semibold leading-tight text-xl font-google-sans", className)} {...props} />
 }
 
 function CardDescription({ className, ...props }: React.ComponentProps<"div">) {
-  return <div data-slot="card-description" className={cn("text-sm text-muted-foreground", className)} {...props} />
+  return <div data-slot="card-description" className={cn("text-md text-muted-foreground font-google-sans", className)} {...props} />
 }
 
 function CardAction({ className, ...props }: React.ComponentProps<"div">) {

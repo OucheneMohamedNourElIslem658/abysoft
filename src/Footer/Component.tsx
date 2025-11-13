@@ -6,6 +6,7 @@ import { Logo } from '@/components/Logo/Logo'
 import { getCachedGlobal } from '@/utilities/getGlobals'
 import { Media } from '@/components/Media'
 import { CMSLink } from '@/components/Link'
+import { FooterControls } from '@/components/FooterControls/Component'
 
 // const languages = [
 //   { code: "en", name: "English", flag: "🇺🇸" },
@@ -46,6 +47,7 @@ const footerLinks = [
 export async function Footer() {
   const footerData: Footer = await getCachedGlobal('footer', 1)()
 
+  if (!footerData) return null
   // const navItems = footerData?.navItems || []
   // console.log('footerData', footerData)
 
@@ -81,6 +83,9 @@ export async function Footer() {
   //   setShowLangMenu(false)
   // }
 
+  console.log(footerData);
+  
+
   return (
     // <footer className="mt-auto border-t border-border bg-black dark:bg-card text-white">
     //   <div className="container py-8 gap-8 flex flex-col md:flex-row md:justify-between">
@@ -106,7 +111,7 @@ export async function Footer() {
           <Link href="/">
             <Media className='h-12' imgClassName='h-full w-fit' priority resource={footerData.logo} />
           </Link>
-          {footerData.navigation.map((section, i) => (
+          {footerData.navigation?.map((section, i) => (
             <div key={i}>
               <h3 className="font-semibold text-foreground mb-4 text-sm uppercase tracking-wide">{section.title}</h3>
               <ul className="space-y-3">
@@ -132,7 +137,7 @@ export async function Footer() {
 
           {/* Right: Theme & Language Controls */}
           <div className="flex items-center gap-4">
-            lang and theme
+            <FooterControls />
             {/* <button
               onClick={toggleTheme}
               className="inline-flex items-center justify-center gap-2 px-3 py-1.5 rounded-full border border-border bg-muted hover:bg-accent transition-colors text-foreground"
