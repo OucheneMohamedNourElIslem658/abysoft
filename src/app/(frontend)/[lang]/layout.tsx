@@ -16,6 +16,7 @@ import { LocaleType } from '@/utilities/types'
 import { TestimonialsBlock } from '@/blocks/Testimonials/Component'
 import UniversitiesBlock from '@/blocks/Universities'
 import { ThemeProvider } from 'next-themes'
+import { AiDocumentationDrawer } from '@/components/AiDocsDarawer'
 
 interface Args {
   children: React.ReactNode,
@@ -49,6 +50,7 @@ export default async function RootLayout({ params, children }: Args) {
             <TestimonialsBlock/> */}
             {/* <TestimonialsBlock /> */}
             {/* <UniversitiesBlock /> */}
+            <AiDocumentationDrawer />
             <Footer />
           </Providers>
         </ThemeProvider>
