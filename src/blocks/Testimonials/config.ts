@@ -5,13 +5,15 @@ import { Block } from 'payload'
 export const Testimonial: Block = {
   slug: 'testimonial',
   interfaceName: 'TestimonialBlock',
+  
   fields: [
     headerField,
     {
       name: 'testimonials',
       label: 'Testimonials',
       relationTo: 'testimonials',
-      maxDepth:4,
+      // maxDepth: 2,
+      // depth: 1,
       type: 'relationship',
       hasMany: true,
     },

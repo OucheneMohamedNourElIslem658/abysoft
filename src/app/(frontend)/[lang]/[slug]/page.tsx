@@ -118,7 +118,7 @@ const queryPageBySlug = cache(async ({ lang, slug }: { lang: LocaleType, slug: s
         equals: slug,
       },
     },
-    depth: 5,
+    // depth: 3,
   })
 
   return result.docs?.[0] || null
