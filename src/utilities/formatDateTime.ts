@@ -1,3 +1,5 @@
+import { LocaleType } from "./types"
+
 export const formatDateTime = (timestamp: string): string => {
   const now = new Date()
   let date = now
@@ -17,4 +19,29 @@ export const formatDateTime = (timestamp: string): string => {
   // const SS = (seconds < 10) ? `0${seconds}` : seconds;
 
   return `${MM}/${DD}/${YYYY}`
+}
+
+export function formatDateTimeLang(
+  date: string | null | undefined,
+  language: LocaleType,
+  includeTime: boolean = false
+): string {
+  if (!date) return '';
+
+  const parsedDate = new Date(date);
+
+  const options: Intl.DateTimeFormatOptions = {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  };
+
+  if (includeTime) {
+    options.hour = '2-digit';
+    options.minute = '2-digit';
+    options.second = '2-digit';
+    options.hour12 = false; // 24h format
+  }
+
+  return new Intl.DateTimeFormat(language, options).format(parsedDate);
 }

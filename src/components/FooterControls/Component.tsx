@@ -26,7 +26,7 @@ export function FooterControls() {
   }, [])
 
   const toggleTheme = () => {
-    console.log(theme);
+    // console.log(theme);
     
     setTheme(theme === "light" ? "dark" : "light")
   }

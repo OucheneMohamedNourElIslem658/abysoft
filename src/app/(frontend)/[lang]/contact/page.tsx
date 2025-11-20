@@ -1,20 +1,24 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { ContactForm } from "@/components/ContactForm"
-import { Mail, Phone, MapPin, Clock, Car } from "lucide-react"
-import Description from "@/components/Description/Index"
+import { Mail, Phone, MapPin, Clock } from "lucide-react"
+// import Description from "@/components/Description/Index"
+import { getCachedGlobal } from "@/utilities/getGlobals"
+import { Contact } from "@/payload-types"
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const contactData = await getCachedGlobal('contact', 1)() as Contact
+  console.log('contactData', contactData)
   return (
     <main className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-16 !pt-28">
         {/* Header */}
-        <Description
+        {/* <Description
           showBadge={true}
           visible={true}
           clientsText="Have questions or need assistance? Our team is here to help! Reach out to us through the contact form or via the provided contact details below. We look forward to connecting with you."
           badgeLabel="Contact Us"
           badgeType="highlight"
-        />
+        /> */}
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16 mt-20">
           {/* Contact Info */}

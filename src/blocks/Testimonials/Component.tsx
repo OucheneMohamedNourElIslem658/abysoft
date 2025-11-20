@@ -8,7 +8,7 @@ import { getPayload } from "payload"
 import configPromise from "@payload-config"
 import { Media } from "@/components/Media"
 
-export async function getPopulatedTestimonials(ids: number[]) {
+async function getPopulatedTestimonials(ids: number[]) {
   if (!ids?.length) return []
   const payload = await getPayload({ config: configPromise })
 
@@ -48,17 +48,7 @@ export const TestimonialsBlock: React.FC<TestimonialBlockProps> = async (data) =
                       <div className="flex gap-5 items-center">
                         <div className="bg-primary text-primary-foreground flex-shrink-0 overflow-hidden rounded-full size-10 flex items-center justify-center">
                           <Media resource={review.photo} alt={review.name} imgClassName="w-full h-full object-cover" className="w-full h-full" />
-                            {/* {review.image ? (
-                                <img src={review.image} alt={review.author} className="w-full h-full object-cover" />
-                            ) : (
-                                <h6>
-                                    {review.author
-                                        .split(" ")
-                                        .map((n) => n[0])
-                                        .slice(0, 2)
-                                        .join("")}
-                                </h6>
-                            )} */}
+                            
                         </div>
                         <div className="flex flex-col">
                             <CardTitle className="text-lg mb-0">{review.name}</CardTitle>

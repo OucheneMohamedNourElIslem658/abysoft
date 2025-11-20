@@ -45,7 +45,7 @@ const footerLinks = [
 ]
 
 export async function Footer() {
-  const footerData: Footer = await getCachedGlobal('footer', 1)()
+  const footerData: Footer = await getCachedGlobal('footer', 1)() as Footer
 
   if (!footerData) return null
   // const navItems = footerData?.navItems || []
@@ -83,7 +83,7 @@ export async function Footer() {
   //   setShowLangMenu(false)
   // }
 
-  console.log(footerData);
+  // console.log(footerData);
   
 
   return (
