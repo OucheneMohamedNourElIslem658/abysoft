@@ -77,7 +77,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
 
               <div className="overflow-y-auto flex-1 px-0">
                 <Accordion type="single" collapsible className="w-full">
-                  {data.navigation.map((item, idx) => (
+                  {data.navigation?.map((item, idx) => (
                     <AccordionItem key={idx} value={`item-${idx}`} className="border-b-0">
                       {item.type === 'dropdown' ? (
                         <>
@@ -141,7 +141,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
         </Link>
         <NavigationMenu className="flex-1">
           <NavigationMenuList>
-            {data.navigation.map((item, idx) =>
+            {data.navigation?.map((item, idx) =>
               item.type === 'dropdown' ? (
                 <NavigationMenuItem key={idx}>
                   <NavigationMenuTrigger className="text-sm focus:text-secondary hover:text-secondary font-medium !bg-inherit">{item.title}</NavigationMenuTrigger>
