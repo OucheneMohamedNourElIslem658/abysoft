@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import { useTheme } from "next-themes"
 import { Moon, Sun, Globe } from "lucide-react"
 import { useRouter, usePathname } from "next/navigation"
+import ThemeToggle from "./ToggleTheme"
 
 const languages = [
   { code: "en", name: "English", flag: "🇺🇸" },
@@ -91,6 +92,7 @@ export function FooterControls() {
           </div>
         )}
       </div>
+
     </div>
   )
 }

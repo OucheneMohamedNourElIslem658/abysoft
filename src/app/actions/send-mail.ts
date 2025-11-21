@@ -1,53 +1,68 @@
 "use server"
 
-import nodemailer from "nodemailer"
+// import { mailOptions, transporter } from "@/lib/mailer"
+// import { getLanguage } from "./strapi"
 
-interface ContactFormData {
-  name: string
-  email: string
-  subject: string
-  message: string
-}
+import nodemailer from 'nodemailer'
+
+const email = process.env.EMAIL
+const password = process.env.PASSWORD
 
 const transporter = nodemailer.createTransport({
-  service: "gmail",
+  service: 'gmail',
   auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASSWORD,
-  },
+    user: email,
+    pass: password
+  }
 })
 
-export async function sendContactEmail(formData: ContactFormData) {
-  try {
-    await transporter.sendMail({
-      from: process.env.EMAIL_USER,
-      to: process.env.EMAIL_TO,
-      subject: `New Contact Form Submission: ${formData.subject}`,
-      html: `
-        <h2>New Contact Form Submission</h2>
-        <p><strong>Name:</strong> ${formData.name}</p>
-        <p><strong>Email:</strong> ${formData.email}</p>
-        <p><strong>Subject:</strong> ${formData.subject}</p>
-        <p><strong>Message:</strong></p>
-        <p>${formData.message.replace(/\n/g, "<br>")}</p>
-      `,
-    })
+const mailOptions = {
+ 
+  from: email,
+  to: email,
+}
 
-    await transporter.sendMail({
-      from: process.env.EMAIL_USER,
-      to: formData.email,
-      subject: "We received your message",
-      html: `
-        <h2>Thank You, ${formData.name}!</h2>
-        <p>We've received your message and will get back to you within 24 hours.</p>
-        <p><strong>Subject:</strong> ${formData.subject}</p>
-        <p>Best regards,<br>The Team</p>
-      `,
-    })
 
-    return { success: true }
-  } catch (error) {
-    console.error("[v0] Error sending email:", error)
-    throw new Error("Failed to send email")
+export async function sendMailAction (prev: any, formData: FormData) {
+
+  // console.log('first', first)
+
+  // const lang = await getLanguage()
+
+  const lang = 'en' // temporary hardcode
+
+  const messages ={
+    success: lang == 'fr' ? 'E-mail envoyé avec succès' : 'Email sent successfully',
+    failure: lang == 'fr' ? "Échec de l'envoi de l'e-mail" : 'Failed to send email',
+    wrongData: lang == 'fr' ? 'Veuillez remplir tous les champs' : 'Please fill all fields'
   }
+ 
+  const newFormData = {
+    name: formData.get('name') as string,
+    email: formData.get('email') as string,
+    subject: formData.get('subject') as string,
+    text: formData.get('message') as string
+  }
+
+
+  console.log('newFormData', newFormData)
+
+  try {
+
+  if (!newFormData.name || !newFormData.email || !newFormData.subject || !newFormData.text) {
+    return { message: messages.wrongData, success: false }
+  }
+
+    await transporter.sendMail({
+      ...mailOptions,
+      subject: `New message from ${newFormData.name}: ${newFormData.subject}`,
+      text: `${newFormData.email} -- ${newFormData.text}`,
+    })
+
+
+    return { message: messages.success, success: true }
+  } catch (error) {
+    return { message: messages.failure, success: false }
+  }
+
 }
