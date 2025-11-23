@@ -2,16 +2,15 @@
 import { useActionState } from "react"
 import { Button } from "@/components/ui/button"
 import { sendMailAction } from "@/app/actions/send-mail"
-import { contactFormTranslations } from "@/hooks/languages/translations"
-
-type Language = "en" | "ar" | "fr"
+import { contactFormTranslations, getTranslation } from "@/hooks/languages/translations"
+import { LocaleType } from "@/utilities/types"
 
 interface ContactFormProps {
-  lang: Language
+  lang: LocaleType
 }
 
 export function ContactForm({ lang }: ContactFormProps) {
-  const t = contactFormTranslations[lang]
+  const t = getTranslation(lang, contactFormTranslations)
   const [state, action, isPending] = useActionState(sendMailAction, null)
 
   return (

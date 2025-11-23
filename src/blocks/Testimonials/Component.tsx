@@ -67,7 +67,7 @@ export const TestimonialsBlock: React.FC<TestimonialBlockProps> = async (data) =
             </div> */}
 
             <p className="mb-6 text-md text-muted-foreground">
-              &quot;{testimonial.quote ?? testimonial.text}&quot;
+              &quot;{testimonial.quote}&quot;
             </p>
 
             <div className="flex items-center gap-3">
@@ -99,8 +99,7 @@ export const TestimonialsBlock: React.FC<TestimonialBlockProps> = async (data) =
                     <div>
                       <p className="font-semibold text-md">{testimonial.name}</p>
                       <p className="text-sm text-muted-foreground">
-                  {testimonial.position ?? testimonial.role}
-                  {testimonial.company ? ` at ${testimonial.company}` : ""}
+                        {testimonial.position}
                       </p>
                     </div>
                   </div>

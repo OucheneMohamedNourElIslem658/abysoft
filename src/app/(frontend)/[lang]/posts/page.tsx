@@ -9,20 +9,18 @@ import React from 'react'
 import PageClient from './page.client'
 import { LocaleType } from '@/utilities/types'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { ArrowRight } from 'lucide-react'
 import { Media } from '@/components/Media'
 import { formatDateTimeLang } from '@/utilities/formatDateTime'
 import Link from 'next/link'
 import RichText from '@/components/RichText'
-import { Language, postsPageTranslations } from '@/hooks/languages/translations'
+import { getTranslation, postsPageTranslations } from '@/hooks/languages/translations'
 
 export const dynamic = 'force-static'
 export const revalidate = 600
 
 type Args = {
   params: Promise<{
-    lang: Language
+    lang: LocaleType
   }>
 }
 
@@ -33,7 +31,7 @@ export default async function Page({params: paramsPromise}: Args) {
   const { lang } =  await paramsPromise
   const payload = await getPayload({ config: configPromise })
 
-  const t = postsPageTranslations[lang]
+  const t = getTranslation(lang, postsPageTranslations)
 
   const posts = await payload.find({
     collection: 'posts',
