@@ -6,6 +6,7 @@ export const Testimonial: Block = {
   slug: 'testimonial',
   interfaceName: 'TestimonialBlock',
   
+  
   fields: [
     headerField,
     {

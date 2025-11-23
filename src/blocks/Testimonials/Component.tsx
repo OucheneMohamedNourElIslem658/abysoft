@@ -32,7 +32,7 @@ export const TestimonialsBlock: React.FC<TestimonialBlockProps> = async (data) =
 
   const reviews = await getPopulatedTestimonials(data.testimonials as number[])
 
-  // console.log('testimonials', quoats)
+  console.log('testimonials', data)
   return (
     <section className="py-16 bg-muted/30">
       <div className="container">
