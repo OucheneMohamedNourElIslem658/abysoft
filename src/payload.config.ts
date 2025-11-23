@@ -21,6 +21,8 @@ import { defaultLexical } from '@/fields/defaultLexical'
 import { getServerSideURL } from './utilities/getURL'
 
 import { s3Storage } from '@payloadcms/storage-s3'
+import { Universities } from './collections/Universities'
+import { Contact } from './Contact/config'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -73,7 +75,7 @@ export default buildConfig({
     }
     // },
   }),
-  collections: [Pages, Posts, Media, Categories, Users, Testimonials],
+  collections: [Pages, Posts, Media, Categories, Users, Testimonials, Universities],
   localization: {
     locales: [
       {
@@ -94,7 +96,7 @@ export default buildConfig({
     fallback: true,
   },
   cors: [getServerSideURL()].filter(Boolean),
-  globals: [Header, Footer],
+  globals: [Header, Footer, Contact],
   plugins: [
     ...plugins,
     s3Storage({

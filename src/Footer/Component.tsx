@@ -2,13 +2,11 @@ import type { Footer } from '@/payload-types'
 // import { useState, useEffect } from "react"
 // import { Moon, Sun, Globe } from "lucide-react"
 import Link from 'next/link'
-import { Logo } from '@/components/Logo/Logo'
 import { getCachedGlobal } from '@/utilities/getGlobals'
 import { Media } from '@/components/Media'
 import { CMSLink } from '@/components/Link'
-import { FooterControls } from '@/components/FooterControls/Component'
-import ThemeToggle from '@/components/FooterControls/ToggleTheme'
 import { ThemeSelector } from '@/providers/Theme/ThemeSelector'
+import { LangToggler } from '@/components/LangToggler/Component'
 
 // const languages = [
 //   { code: "en", name: "English", flag: "🇺🇸" },
@@ -140,63 +138,8 @@ export async function Footer() {
           {/* Right: Theme & Language Controls */}
           <div className="flex items-center gap-4">
             {/* <FooterControls /> */}
-
-      {/* <ThemeToggle /> */}
-      <ThemeSelector />
-
-
-
-            
-            {/* <button
-              onClick={toggleTheme}
-              className="inline-flex items-center justify-center gap-2 px-3 py-1.5 rounded-full border border-border bg-muted hover:bg-accent transition-colors text-foreground"
-              aria-label="Toggle theme"
-              title={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
-            >
-              {theme === "light" ? (
-                <>
-                  <Moon size={16} />
-                  <span className="text-xs hidden sm:inline">Dark</span>
-                </>
-              ) : (
-                <>
-                  <Sun size={16} />
-                  <span className="text-xs hidden sm:inline">Light</span>
-                </>
-              )}
-            </button> */}
-
-            {/* <div className="relative"> */}
-              
-              {/* <button
-                onClick={() => setShowLangMenu(!showLangMenu)}
-                className="inline-flex items-center justify-center gap-2 px-3 py-1.5 rounded-full border border-border bg-muted hover:bg-accent transition-colors text-foreground"
-                aria-label="Change language"
-                title="Select language"
-              >
-                <Globe size={16} />
-                <span className="text-xs hidden sm:inline uppercase">
-                  {languages.find((l) => l.code === language)?.code}
-                </span>
-              </button> */}
-
-              {/* {showLangMenu && (
-                <div className="absolute bottom-full right-0 mb-2 w-48 bg-card border border-border rounded-lg shadow-lg z-50">
-                  {languages.map((lang) => (
-                    <button
-                      key={lang.code}
-                      onClick={() => handleLanguageChange(lang.code)}
-                      className={`w-full px-4 py-2 text-left text-sm transition-colors first:rounded-t-lg last:rounded-b-lg ${
-                        language === lang.code ? "bg-primary text-primary-foreground" : "text-foreground hover:bg-muted"
-                      }`}
-                    >
-                      <span className="mr-2">{lang.flag}</span>
-                      {lang.name}
-                    </button>
-                  ))}
-                </div>
-              )} */}
-            {/* </div> */}
+            <ThemeSelector />
+            <LangToggler />
           </div>
         </div>
       </div>

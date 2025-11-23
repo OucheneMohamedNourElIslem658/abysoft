@@ -13,8 +13,8 @@ import { getServerSideURL } from '@/utilities/getURL'
 import { geistMono, googleSans } from './fonts'
 import { Header } from '@/Header/Component'
 import { LocaleType } from '@/utilities/types'
-import { TestimonialsBlock } from '@/blocks/Testimonials/Component'
-import UniversitiesBlock from '@/blocks/Universities'
+// import { TestimonialsBlock } from '@/blocks/Testimonials/Component'
+// import UniversitiesBlock from '@/blocks/Universities/Component'
 import { ThemeProvider } from 'next-themes'
 import { AiDocumentationDrawer } from '@/components/AiDocsDarawer'
 
@@ -49,7 +49,6 @@ export default async function RootLayout({ params, children }: Args) {
             <PricingBlock/>
             <TestimonialsBlock/> */}
             {/* <TestimonialsBlock /> */}
-            {/* <UniversitiesBlock /> */}
             <AiDocumentationDrawer />
             <Footer />
           </Providers>

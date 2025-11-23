@@ -2,16 +2,16 @@
 import { headerField } from '@/fields/headerField'
 import { Block } from 'payload'
 
-export const Testimonial: Block = {
-  slug: 'testimonial',
-  interfaceName: 'TestimonialBlock',
+export const University: Block = {
+  slug: 'university',
+  interfaceName: 'UniversityBlock',
   
   fields: [
     headerField,
     {
-      name: 'testimonials',
-      label: 'Testimonials',
-      relationTo: 'testimonials',
+      name: 'universities',
+      label: 'Universities',
+      relationTo: 'universities',
       // maxDepth: 2,
       // depth: 1,
       type: 'relationship',

@@ -73,6 +73,7 @@ export interface Config {
     categories: Category;
     users: User;
     testimonials: Testimonial;
+    universities: University;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -96,6 +97,7 @@ export interface Config {
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
+    universities: UniversitiesSelect<false> | UniversitiesSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -113,10 +115,12 @@ export interface Config {
   globals: {
     header: Header;
     footer: Footer;
+    contact: Contact;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
+    contact: ContactSelect<false> | ContactSelect<true>;
   };
   locale: 'en' | 'fr' | 'ar';
   user: User & {
@@ -371,6 +375,7 @@ export interface Page {
         blockType: 'tabs';
       }
     | TestimonialBlock
+    | UniversityBlock
   )[];
   meta?: {
     title?: string | null;
@@ -1054,6 +1059,61 @@ export interface Testimonial {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "UniversityBlock".
+ */
+export interface UniversityBlock {
+  header: {
+    /**
+     * Optional text to appear above the title
+     */
+    span?:
+      | (
+          | {
+              text: string;
+              apperance: 'blue' | 'red' | 'green' | 'yellow' | 'purple';
+              id?: string | null;
+              blockName?: string | null;
+              blockType: 'highlight';
+            }
+          | {
+              relation: (
+                | {
+                    relationTo: 'categories';
+                    value: number | Category;
+                  }
+                | {
+                    relationTo: 'users';
+                    value: number | User;
+                  }
+              )[];
+              id?: string | null;
+              blockName?: string | null;
+              blockType: 'relation';
+            }
+        )[]
+      | null;
+    title: string;
+  };
+  universities?: (number | University)[] | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'university';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "universities".
+ */
+export interface University {
+  id: number;
+  name: string;
+  location: string;
+  studentsNumber?: string | null;
+  logo?: (number | null) | Media;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1267,6 +1327,10 @@ export interface PayloadLockedDocument {
         value: number | Testimonial;
       } | null)
     | ({
+        relationTo: 'universities';
+        value: number | University;
+      } | null)
+    | ({
         relationTo: 'redirects';
         value: number | Redirect;
       } | null)
@@ -1461,6 +1525,7 @@ export interface PagesSelect<T extends boolean = true> {
               blockName?: T;
             };
         testimonial?: T | TestimonialBlockSelect<T>;
+        university?: T | UniversityBlockSelect<T>;
       };
   meta?:
     | T
@@ -1629,6 +1694,39 @@ export interface TestimonialBlockSelect<T extends boolean = true> {
         title?: T;
       };
   testimonials?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "UniversityBlock_select".
+ */
+export interface UniversityBlockSelect<T extends boolean = true> {
+  header?:
+    | T
+    | {
+        span?:
+          | T
+          | {
+              highlight?:
+                | T
+                | {
+                    text?: T;
+                    apperance?: T;
+                    id?: T;
+                    blockName?: T;
+                  };
+              relation?:
+                | T
+                | {
+                    relation?: T;
+                    id?: T;
+                    blockName?: T;
+                  };
+            };
+        title?: T;
+      };
+  universities?: T;
   id?: T;
   blockName?: T;
 }
@@ -1808,6 +1906,18 @@ export interface TestimonialsSelect<T extends boolean = true> {
   position?: T;
   quote?: T;
   photo?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "universities_select".
+ */
+export interface UniversitiesSelect<T extends boolean = true> {
+  name?: T;
+  location?: T;
+  studentsNumber?: T;
+  logo?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -2157,6 +2267,16 @@ export interface Footer {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact".
+ */
+export interface Contact {
+  id: number;
+  cover: number | Media;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "header_select".
  */
 export interface HeaderSelect<T extends boolean = true> {
@@ -2212,6 +2332,16 @@ export interface FooterSelect<T extends boolean = true> {
             };
         id?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact_select".
+ */
+export interface ContactSelect<T extends boolean = true> {
+  cover?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
