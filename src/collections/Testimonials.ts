@@ -1,16 +1,14 @@
 // src/collections/Testimonials.ts
-import { anyone } from '@/access/anyone'
-import { authenticated } from '@/access/authenticated'
 import { CollectionConfig } from 'payload'
 
 export const Testimonials: CollectionConfig = {
   slug: 'testimonials',
-  access: {
-    create: authenticated,
-    delete: authenticated,
-    read: anyone,
-    update: authenticated,
-  },
+  // access: {
+  //   create: authenticated,
+  //   delete: authenticated,
+  //   read: anyone,
+  //   update: authenticated,
+  // },
   admin: {
     useAsTitle: 'name',
   },

@@ -7,52 +7,33 @@ export const headerField: Field = {
   fields: [
     {
       name: "span",
-      type: "blocks",
-      label: "Span",
-      required: false,
-      maxRows: 1,
-      admin: {
-        description: "Optional text to appear above the title",
-      },
-      blocks: [
+      type: "group",
+      required: true,
+      
+      fields: [
         {
-
-          slug: "highlight",
-          fields: [
-            {
-              name: "text",
-              type: "text",
-              required: true,
-              label: "Text",
-            }, 
-            {
-              name: "apperance",
-              type: "select",
-              required: true,
-              label: "Apperance",
-              options: ["blue", "red", "green", "yellow", "purple"],
-            }
-          ]
-        },
+          name: "text",
+          type: "text",
+          required: true,
+          label: "Text",
+          localized: true,
+        }, 
         {
-          slug: "relation",
-          fields: [
-            {
-              name: "relation",
-              type: "relationship",
-              required: true,
-              label: "Relation",
-              hasMany: true,
-              relationTo: ["categories", "users"],
-            }
-          ]
+          name: "apperance",
+          type: "select",
+          required: true,
+          label: "Apperance",
+          options: ["blue", "red", "green", "yellow", "purple"],
         }
-      ]
+      ] 
+    }, 
+      
 
-    },
+    
     {
       name: "title",
       type: "text",
+      localized: true,
       label: "Section Title",
       required: true,
     },
