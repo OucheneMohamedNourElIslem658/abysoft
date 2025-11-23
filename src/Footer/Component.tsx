@@ -1,109 +1,24 @@
 import type { Footer } from '@/payload-types'
-// import { useState, useEffect } from "react"
-// import { Moon, Sun, Globe } from "lucide-react"
 import Link from 'next/link'
 import { getCachedGlobal } from '@/utilities/getGlobals'
 import { Media } from '@/components/Media'
 import { CMSLink } from '@/components/Link'
 import { ThemeSelector } from '@/providers/Theme/ThemeSelector'
 import { LangToggler } from '@/components/LangToggler/Component'
+import { LocaleType } from '@/utilities/types'
 
-// const languages = [
-//   { code: "en", name: "English", flag: "🇺🇸" },
-//   { code: "ar", name: "العربية", flag: "🇸🇦" },
-//   { code: "fr", name: "Français", flag: "🇫🇷" },
-// ]
 
-const footerLinks = [
-  {
-    title: "Product",
-    links: [
-      { label: "Features", href: "#features" },
-      { label: "Pricing", href: "#pricing" },
-      { label: "Security", href: "#security" },
-      { label: "Roadmap", href: "#roadmap" },
-    ],
-  },
-  {
-    title: "Company",
-    links: [
-      { label: "About", href: "#about" },
-      { label: "Blog", href: "#blog" },
-      { label: "Careers", href: "#careers" },
-      { label: "Contact", href: "#contact" },
-    ],
-  },
-  {
-    title: "Resources",
-    links: [
-      { label: "Documentation", href: "#docs" },
-      { label: "API Reference", href: "#api" },
-      { label: "Community", href: "#community" },
-      { label: "Support", href: "#support" },
-    ],
-  },
-]
 
-export async function Footer() {
-  const footerData: Footer = await getCachedGlobal('footer', 1)()
+
+export async function Footer({lang}: {lang: LocaleType}) {
+
+  // const locale = lang as Footer['locale']
+  const footerData: Footer = await getCachedGlobal('footer', 1, lang)() as Footer
 
   if (!footerData) return null
-  // const navItems = footerData?.navItems || []
-  // console.log('footerData', footerData)
-
-  // const [theme, setTheme] = useState<"light" | "dark">("light")
-  // const [language, setLanguage] = useState("en")
-  // const [showLangMenu, setShowLangMenu] = useState(false)
-  // const [mounted, setMounted] = useState(false)
-
-  // useEffect(() => {
-  //   setMounted(true)
-  //   const savedTheme = localStorage.getItem("theme") as "light" | "dark"
-  //   const savedLang = localStorage.getItem("language") as string
-
-  //   if (savedTheme) {
-  //     setTheme(savedTheme)
-  //     document.documentElement.setAttribute("data-theme", savedTheme)
-  //   }
-  //   if (savedLang) {
-  //     setLanguage(savedLang)
-  //   }
-  // }, [])
-
-  // const toggleTheme = () => {
-  //   const newTheme = theme === "light" ? "dark" : "light"
-  //   setTheme(newTheme)
-  //   localStorage.setItem("theme", newTheme)
-  //   document.documentElement.setAttribute("data-theme", newTheme)
-  // }
-
-  // const handleLanguageChange = (code: string) => {
-  //   setLanguage(code)
-  //   localStorage.setItem("language", code)
-  //   setShowLangMenu(false)
-  // }
-
-  console.log(footerData);
   
-
   return (
-    // <footer className="mt-auto border-t border-border bg-black dark:bg-card text-white">
-    //   <div className="container py-8 gap-8 flex flex-col md:flex-row md:justify-between">
-    //     <Link className="flex items-center" href="/">
-    //       <Logo />
-    //     </Link>
-
-    //     <div className="flex flex-col-reverse items-start md:flex-row gap-4 md:items-center">
-    //       <ThemeSelector />
-    //       <nav className="flex flex-col md:flex-row gap-4">
-    //         {navItems.map(({ link }, i) => {
-    //           return <CMSLink className="text-white" key={i} {...link} />
-    //         })}
-    //       </nav>
-    //     </div>
-    //   </div>
-    // </footer>
-
+    
     <footer className="mt-auto border-t border-border bg-background">
       {/* Main Footer Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">

@@ -27,6 +27,7 @@ export const Footer: GlobalConfig = {
           name: 'title',
           type: 'text',
           required: true,
+          localized: true,
          
         },
         {

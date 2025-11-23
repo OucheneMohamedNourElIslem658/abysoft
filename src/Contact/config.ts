@@ -13,6 +13,30 @@ export const Contact: GlobalConfig = {
       relationTo: 'media',
       required: true,
     },
+    {
+      name: 'phone',
+      type: 'text',
+      required: true,
+    },
+    {
+      name: 'email',
+      type: 'text',
+      required: true,
+    },
+
+  
+    {
+      name: 'address',
+      type: 'text',
+      required: true,
+      localized: true,
+    },
+    {
+      name: 'timework',
+      type: 'text',
+      required: true,
+      localized: true,
+    }
     // {
 
     // }

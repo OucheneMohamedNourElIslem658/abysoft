@@ -1,9 +1,11 @@
-export type Language = "ar" | "en" | "fr";
+
+export type Language = "ar" | "en" | "fr" ;
+
 
 export type Translations = {
-    [key in Language]: {
-        [key: string]: string;
-    };
+  [key: any]: {
+    [key: string]: string;
+  };
 };
 
 export const contactFormTranslations : Translations = {

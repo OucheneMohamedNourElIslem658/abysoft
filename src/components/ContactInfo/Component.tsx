@@ -1,3 +1,4 @@
+import { Contact } from "@/payload-types"
 import { Mail, Phone, MapPin, Clock } from "lucide-react"
 
 const contactInfoTranslations = {
@@ -6,30 +7,20 @@ const contactInfoTranslations = {
     phone: "Phone",
     address: "Address",
     hours: "Business Hours",
-    emailValue: "contact@company.com",
-    phoneValue: "+1 (555) 123-4567",
-    addressValue: "123 Business St, City, State 12345",
-    hoursValue: "Mon - Fri: 9:00 AM - 6:00 PM",
+   
   },
   ar: {
     email: "البريد الإلكتروني",
     phone: "الهاتف",
     address: "العنوان",
     hours: "ساعات العمل",
-    emailValue: "contact@company.com",
-    phoneValue: "+1 (555) 123-4567",
-    addressValue: "123 شارع الأعمال، المدينة، الولاية 12345",
-    hoursValue: "من الاثنين إلى الجمعة: 9:00 صباحًا - 6:00 مساءً",
+    
   },
   fr: {
     email: "Email",
     phone: "Téléphone",
     address: "Adresse",
     hours: "Heures d'ouverture",
-    emailValue: "contact@company.com",
-    phoneValue: "+1 (555) 123-4567",
-    addressValue: "123 Rue des Affaires, Ville, État 12345",
-    hoursValue: "Lun - Ven: 9:00 AM - 6:00 PM",
   },
 }
 
@@ -37,9 +28,10 @@ type Language = "en" | "ar" | "fr"
 
 interface ContactInfoProps {
   lang: Language
+  contact: Contact
 }
 
-export function ContactInfo({ lang }: ContactInfoProps) {
+export function ContactInfo({ contact, lang }: ContactInfoProps) {
   const t = contactInfoTranslations[lang]
   const isRTL = lang === "ar"
 
@@ -49,7 +41,7 @@ export function ContactInfo({ lang }: ContactInfoProps) {
         <Mail className={`size-5 text-primary flex-shrink-0 mt-1 ${isRTL ? "ml-2" : "mr-2"}`} />
         <div>
           <h5 className="font-semibold text-foreground">{t.email}</h5>
-          <p className="text-muted-foreground text-sm">{t.emailValue}</p>
+          <p className="text-muted-foreground text-sm">{contact.email}</p>
         </div>
       </div>
 
@@ -57,7 +49,7 @@ export function ContactInfo({ lang }: ContactInfoProps) {
         <Phone className={`size-5 text-primary flex-shrink-0 mt-1 ${isRTL ? "ml-2" : "mr-2"}`} />
         <div>
           <h5 className="font-semibold text-foreground">{t.phone}</h5>
-          <p className="text-muted-foreground text-sm">{t.phoneValue}</p>
+          <p className="text-muted-foreground text-sm">{contact.phone}</p>
         </div>
       </div>
 
@@ -65,7 +57,7 @@ export function ContactInfo({ lang }: ContactInfoProps) {
         <MapPin className={`size-5 text-primary flex-shrink-0 mt-1 ${isRTL ? "ml-2" : "mr-2"}`} />
         <div>
           <h5 className="font-semibold text-foreground">{t.address}</h5>
-          <p className="text-muted-foreground text-sm">{t.addressValue}</p>
+          <p className="text-muted-foreground text-sm">{contact.address}</p>
         </div>
       </div>
 
@@ -73,7 +65,7 @@ export function ContactInfo({ lang }: ContactInfoProps) {
         <Clock className={`size-5 text-primary flex-shrink-0 mt-1 ${isRTL ? "ml-2" : "mr-2"}`} />
         <div>
           <h5 className="font-semibold text-foreground">{t.hours}</h5>
-          <p className="text-muted-foreground text-sm">{t.hoursValue}</p>
+          <p className="text-muted-foreground text-sm">{contact.timework}</p>
         </div>
       </div>
     </div>

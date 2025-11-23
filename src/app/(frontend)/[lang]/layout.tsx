@@ -42,7 +42,7 @@ export default async function RootLayout({ params, children }: Args) {
           <Providers>
             
             <div className='fixed top-0 left-0 right-0  z-50 bg-background'>
-              <Header />  
+              <Header lang={lang} />  
             </div>
             {children}
             {/* <ComparisonStepper/>
@@ -50,7 +50,7 @@ export default async function RootLayout({ params, children }: Args) {
             <TestimonialsBlock/> */}
             {/* <TestimonialsBlock /> */}
             <AiDocumentationDrawer />
-            <Footer />
+            <Footer lang={lang} />
           </Providers>
         </ThemeProvider>
       </body>

@@ -2272,6 +2272,10 @@ export interface Footer {
 export interface Contact {
   id: number;
   cover: number | Media;
+  phone: string;
+  email: string;
+  address: string;
+  timework: string;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -2342,6 +2346,10 @@ export interface FooterSelect<T extends boolean = true> {
  */
 export interface ContactSelect<T extends boolean = true> {
   cover?: T;
+  phone?: T;
+  email?: T;
+  address?: T;
+  timework?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

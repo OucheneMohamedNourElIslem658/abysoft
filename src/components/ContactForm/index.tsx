@@ -3,11 +3,13 @@ import { useActionState } from "react"
 import { Button } from "@/components/ui/button"
 import { sendMailAction } from "@/app/actions/send-mail"
 import { contactFormTranslations } from "@/hooks/languages/translations"
+import { LocaleType } from "@/utilities/types"
+// import { Locale } from "node_modules/next/dist/compiled/@vercel/og/satori"
 
-type Language = "en" | "ar" | "fr"
+// type Language = "en" | "ar" | "fr"
 
 interface ContactFormProps {
-  lang: Language
+  lang: LocaleType
 }
 
 export function ContactForm({ lang }: ContactFormProps) {

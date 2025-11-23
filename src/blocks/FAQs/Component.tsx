@@ -17,14 +17,14 @@ export const FaqsBlock: React.FC<FaqsBlockProps> = ({ faqs, header }) => {
   return (
     <section className="py-16 bg-muted/30">
 
-      <div className="container grid grid-cols-1 md:grid-cols-2">
+      <div className="container grid grid-cols-1 md:grid-cols-3">
 
         {header && <HeaderField header={header} />}
 
-        <Accordion type="single" collapsible className="mt-10">
+        <Accordion type="single" collapsible className="mt-10 bg-muted/90 rounded-2xl col-span-2  px-3">
           {faqs.map((faq, index) => 
-            <AccordionItem key={index} value={`item-${index}`}>
-              <AccordionTrigger className="text-lg font-semibold hover:text-primary transition-colors font-geist-mono data-[state=open]:text-primary text-start">
+            <AccordionItem className="px-3 py-2 border-b-2 border-border last-of-type:border-0" key={index} value={`item-${index}`}>
+              <AccordionTrigger className="text-xl transition-colors data-[state=open]:text-primary text-start !border-b-0">
                 {faq.question}
               </AccordionTrigger>
               <AccordionContent className="text-base text-muted-foreground pt-2">
