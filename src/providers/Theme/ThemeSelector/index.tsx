@@ -13,6 +13,7 @@ import type { Theme } from './types'
 
 import { useTheme } from '..'
 import { themeLocalStorageKey } from './types'
+import { Moon, Sun, SunMoon } from 'lucide-react'
 
 export const ThemeSelector: React.FC = () => {
   const { setTheme } = useTheme()
@@ -39,6 +40,14 @@ export const ThemeSelector: React.FC = () => {
         aria-label="Select a theme"
         className="w-auto bg-transparent gap-2 pl-0 md:pl-3 border-none"
       >
+        {value === 'light' ? (
+          <Sun size={16} />
+        ) : value === 'dark' ? (
+          <Moon size={16} />
+        ) : (
+          // do icon for auto diffrent than sun and moon do it close sytem icon from lucid icons
+          <SunMoon size={16} />
+        )}
         <SelectValue placeholder="Theme" />
       </SelectTrigger>
       <SelectContent>

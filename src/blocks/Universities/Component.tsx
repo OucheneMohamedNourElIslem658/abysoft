@@ -1,5 +1,3 @@
-
-// import Description from "@/components/Description/Index";
 import { Card, CardContent } from "@/components/ui/card"
 import { UniversityBlock as UniversityBlockProps } from "@/payload-types"
 import HeaderField from "@/components/HeaderField"
@@ -30,9 +28,8 @@ async function getPopulatedUniversities(ids: number[]) {
 }
 
 export const UniversitiesBlock: React.FC<UniversityBlockProps> = async (data) => {
-  // console.log('data------------------------------------>', data)
   const universities = await getPopulatedUniversities(data.universities as number[])
-  // console.log('universities[0].logo', universities[0].logo)
+
   return (
     <section className="py-16 bg-muted/30">
       <div className="container">

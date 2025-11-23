@@ -15,13 +15,14 @@ import { Media } from '@/components/Media'
 import { formatDateTimeLang } from '@/utilities/formatDateTime'
 import Link from 'next/link'
 import RichText from '@/components/RichText'
+import { Language, postsPageTranslations } from '@/hooks/languages/translations'
 
 export const dynamic = 'force-static'
 export const revalidate = 600
 
 type Args = {
   params: Promise<{
-    lang: LocaleType
+    lang: Language
   }>
 }
 
@@ -31,6 +32,8 @@ type Args = {
 export default async function Page({params: paramsPromise}: Args) {
   const { lang } =  await paramsPromise
   const payload = await getPayload({ config: configPromise })
+
+  const t = postsPageTranslations[lang]
 
   const posts = await payload.find({
     collection: 'posts',
@@ -53,7 +56,7 @@ export default async function Page({params: paramsPromise}: Args) {
       <PageClient />
       <div className="container mb-16">
         <div className="prose dark:prose-invert max-w-none">
-          <h1>Posts</h1>
+          <h1>{t.title}</h1>
         </div>
       </div>
 
@@ -69,6 +72,7 @@ export default async function Page({params: paramsPromise}: Args) {
       {/* <CollectionArchive posts={posts.docs} /> */}
       <div className="container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {posts.docs.map((post, i) => (
+          <Link href={`/${lang}/posts/${post.slug}`} key={i} className="no-underline hover:underline">
           <Card
             key={i}
             className="overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col h-full"
@@ -100,11 +104,9 @@ export default async function Page({params: paramsPromise}: Args) {
                 {post.populatedAuthors && post.populatedAuthors.length > 0 && post.populatedAuthors.map((author, i) => (
                   <span key={i}>{author.name}</span>
                 ))}</span>
-              <Link href={`/${lang}/posts/${post.slug}`} className="gap-1 flex items-center text-sm font-medium">
-                Read More <ArrowRight className="size-3" />
-              </Link>
             </div>
           </Card>
+          </Link>
         ))}
       </div>
 

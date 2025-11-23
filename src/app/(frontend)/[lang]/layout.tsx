@@ -49,7 +49,6 @@ export default async function RootLayout({ params, children }: Args) {
             <PricingBlock/>
             <TestimonialsBlock/> */}
             {/* <TestimonialsBlock /> */}
-            {/* <UniversitiesBlock /> */}
             <AiDocumentationDrawer />
             <Footer />
           </Providers>
