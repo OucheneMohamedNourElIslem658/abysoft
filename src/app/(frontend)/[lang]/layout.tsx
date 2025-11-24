@@ -23,9 +23,7 @@ interface Args {
   params: Promise<{
     lang: LocaleType
   }>
-}
-  
-    
+}   
 
 export default async function RootLayout({ params, children }: Args) {
  
@@ -49,7 +47,7 @@ export default async function RootLayout({ params, children }: Args) {
             <PricingBlock/>
             <TestimonialsBlock/> */}
             {/* <TestimonialsBlock /> */}
-            <AiDocumentationDrawer />
+            <AiDocumentationDrawer lang={lang}/>
             <Footer />
           </Providers>
         </ThemeProvider>

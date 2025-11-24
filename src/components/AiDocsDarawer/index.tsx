@@ -6,6 +6,8 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Loader2, Send, MessageCircle, X } from 'lucide-react'
 import { cn } from '@/utilities/ui'
+import { LocaleType } from '@/utilities/types'
+import { getTranslation, ragDrawerTranslatons } from '@/hooks/languages/translations'
 
 interface Message {
   id: string
@@ -14,13 +16,18 @@ interface Message {
   timestamp: Date
 }
 
-export function AiDocumentationDrawer() {
+interface AiDocumentationDrawerProps {
+  lang: LocaleType
+}
+
+export function AiDocumentationDrawer({ lang } : AiDocumentationDrawerProps) {
   const [open, setOpen] = useState(false)
+  const t = getTranslation(lang, ragDrawerTranslatons)
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
       type: 'assistant',
-      content: 'Hi! 👋 I\'m here to help you navigate our website and answer any questions about our services, features, and how to get started. What would you like to know?',
+      content: t.initialMessage,
       timestamp: new Date(),
     },
   ])
@@ -37,7 +44,6 @@ export function AiDocumentationDrawer() {
   }, [messages])
 
   const generateAiResponse = async (userMessage: string): Promise<string> => {
-    // Simulate API call with rich documentation responses
     const responses: { [key: string]: string } = {
       'blog': 'Check out our <strong>Blogs</strong> section to read the latest articles and insights. You can browse posts by categories and discover valuable content to help you stay updated.',
       'testimonials': 'Visit our <strong>Testimonials</strong> page to see what our customers say about our services. Real stories from real users who have benefited from our platform.',
@@ -109,9 +115,9 @@ export function AiDocumentationDrawer() {
         <DrawerHeader className="border-b border-border px-4 py-3">
           <div className="flex items-start justify-between">
             <div className='flex flex-col items-start'>
-              <DrawerTitle className='text-2xl mb-1'>Documentation Assistant</DrawerTitle>
+              <DrawerTitle className='text-2xl mb-1'>{t.title}</DrawerTitle>
               <DrawerDescription className='text-base'>
-                Ask anything about our website and features
+                {t.description}
               </DrawerDescription>
             </div>
             <DrawerClose asChild>
@@ -152,7 +158,7 @@ export function AiDocumentationDrawer() {
               <div className="bg-muted text-foreground px-4 py-2.5 rounded-lg rounded-bl-none">
                 <div className="flex gap-2 items-center">
                   <Loader2 className="w-4 h-4 animate-spin" />
-                  <span className="text-sm">Thinking...</span>
+                  <span className="text-sm">{t.thinking}</span>
                 </div>
               </div>
             </div>
@@ -163,7 +169,7 @@ export function AiDocumentationDrawer() {
         {/* Input Area */}
         <DrawerFooter className='flex flex-row gap-2 p-4'>
           <Input
-            placeholder="Ask about blogs, contact, features..."
+            placeholder={t.inputPlaceholder}
             value={input}
             onChange={e => setInput(e.target.value)}
             onKeyPress={handleKeyPress}

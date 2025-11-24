@@ -115,6 +115,41 @@ export const contactInfoTranslations : Translations = {
   all: {}
 }
 
+export const ragDrawerTranslatons : Translations = {
+  en: {
+    title: "Documentation Assistant",
+    description: "Ask anything about our website and features",
+    initialMessage:
+      "Hi! 👋 I'm here to help you navigate our website and answer any questions about our services, features, and how to get started. What would you like to know?",
+    thinking: "Thinking...",
+    inputPlaceholder: "Ask about blogs, contact, features...",
+    trigger: "Docs Assistant",
+    close: "Close",
+  },
+  ar: {
+    title: "مساعد التوثيق",
+    description: "اسأل عن أي شيء حول موقعنا وميزاته",
+    initialMessage:
+      "مرحبًا! 👋 أنا هنا لمساعدتك في التنقل داخل موقعنا والإجابة عن أي أسئلة حول خدماتنا وميزاته وكيفية البدء. ماذا تريد أن تعرف؟",
+    thinking: "جاري التفكير...",
+    inputPlaceholder: "اسأل عن المدونات، التواصل، الميزات...",
+    trigger: "مساعد التوثيق",
+    close: "إغلاق",
+  },
+  fr: {
+    title: "Assistant de documentation",
+    description: "Posez des questions sur notre site et ses fonctionnalités",
+    initialMessage:
+      "Bonjour ! 👋 Je suis là pour vous aider à naviguer sur notre site et répondre à vos questions sur nos services, fonctionnalités et comment commencer. Que souhaitez-vous savoir ?",
+    thinking: "Réponse en cours...",
+    inputPlaceholder: "Demandez à propos des blogs, contact, fonctionnalités...",
+    trigger: "Assistant Docs",
+    close: "Fermer",
+  },
+
+  all: {},
+}
+
 export const getTranslation = (lang: LocaleType, translations : Translations): Translation => {
   return translations[lang || 'en'];
 }

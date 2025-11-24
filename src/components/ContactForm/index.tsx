@@ -4,6 +4,9 @@ import { Button } from "@/components/ui/button"
 import { sendMailAction } from "@/app/actions/send-mail"
 import { contactFormTranslations, getTranslation } from "@/hooks/languages/translations"
 import { LocaleType } from "@/utilities/types"
+import { Toaster } from "../ui/sonner"
+import { useEffect } from "react"
+import { toast } from "sonner"
 
 interface ContactFormProps {
   lang: LocaleType
@@ -12,6 +15,18 @@ interface ContactFormProps {
 export function ContactForm({ lang }: ContactFormProps) {
   const t = getTranslation(lang, contactFormTranslations)
   const [state, action, isPending] = useActionState(sendMailAction, null)
+  const isSuccess = state?.success
+  const message = state?.message
+
+  useEffect(() => {
+    if (!state) return
+
+    if (isSuccess) {
+      toast.success(message ?? t.send ?? "Sent")
+    } else {
+      toast.error(message ?? t.sending ?? "Error")
+    }
+  }, [state, isSuccess, message, t.send, t.sending])
 
   return (
     <form action={action} className={`space-y-6`}>
@@ -77,6 +92,7 @@ export function ContactForm({ lang }: ContactFormProps) {
           {isPending ? t.sending : t.send}
         </Button>
       </div>
+      <Toaster className="bg-destructive" richColors position="top-center"/>
     </form>
   )
 }
