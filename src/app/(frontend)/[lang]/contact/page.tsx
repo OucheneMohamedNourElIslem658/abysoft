@@ -1,7 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card"
 import { ContactForm } from "@/components/ContactForm"
 import { ContactInfo } from "@/components/ContactInfo/Component"
-import { contactpageTranslations } from "@/hooks/languages/translations"
+import { contactpageTranslations, getTranslation } from "@/hooks/languages/translations"
 import { LocaleType } from "@/utilities/types"
 import { Contact } from "@/payload-types"
 
@@ -16,7 +16,7 @@ interface ContactPageProps {
 
 export default async function ContactPage({ params: paramsPromise }: ContactPageProps) {
   const { lang } = await paramsPromise
-  const t = contactpageTranslations[lang]
+  const t = getTranslation(lang, contactpageTranslations)
 
   const payload = await getPayload({ config: configPromise })
   
@@ -50,7 +50,7 @@ export default async function ContactPage({ params: paramsPromise }: ContactPage
               <Media className="w-full h-full" imgClassName="w-full h-full object-cover" resource={contactGlobal.cover} />
               {/* <img src="https://cdn.generationvoyage.fr/2025/04/Universite-Harvard-Boston-USA.jpeg" alt="Contact" className="w-full h-full object-cover" /> */}
             </div>
-            <Card>
+            <Card className="bg-muted/90">
               <CardContent className="pt-6">
                 <ContactInfo contact={contactGlobal} lang={lang} />
               </CardContent>

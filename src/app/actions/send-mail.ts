@@ -1,5 +1,6 @@
 "use server"
 
+import { getLanguage } from '@/utilities/getLanguage'
 // import { mailOptions, transporter } from "@/lib/mailer"
 // import { getLanguage } from "./strapi"
 
@@ -25,16 +26,43 @@ const mailOptions = {
 
 export async function sendMailAction (prev: any, formData: FormData) {
 
-  // console.log('first', first)
+  const lang = await getLanguage()
 
-  // const lang = await getLanguage()
+  let messages : {
+    success: string,
+    failure: string,
+    wrongData: string
+  }
 
-  const lang = 'en' // temporary hardcode
-
-  const messages ={
-    success: lang == 'fr' ? 'E-mail envoyé avec succès' : 'Email sent successfully',
-    failure: lang == 'fr' ? "Échec de l'envoi de l'e-mail" : 'Failed to send email',
-    wrongData: lang == 'fr' ? 'Veuillez remplir tous les champs' : 'Please fill all fields'
+  switch (lang) {
+    case 'fr':
+      messages = {
+        success: 'E-mail envoyé avec succès',
+        failure: "Échec de l'envoi de l'e-mail",
+        wrongData: 'Veuillez remplir tous les champs'
+      }
+      break
+    case 'en':
+      messages = {
+        success: 'Email sent successfully',
+        failure: 'Failed to send email',
+        wrongData: 'Please fill all fields'
+      }
+      break
+    case 'ar':
+      messages = {
+        success: 'تم إرسال البريد الإلكتروني بنجاح',
+        failure: 'فشل في إرسال البريد الإلكتروني',
+        wrongData: 'يرجى ملء جميع الحقول'
+      }
+      break
+    default:
+      messages = {
+        success: 'Email sent successfully',
+        failure: 'Failed to send email',
+        wrongData: 'Please fill all fields'
+      }
+      break
   }
  
   const newFormData = {

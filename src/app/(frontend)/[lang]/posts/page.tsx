@@ -12,14 +12,15 @@ import { Media } from '@/components/Media'
 import { formatDateTimeLang } from '@/utilities/formatDateTime'
 import Link from 'next/link'
 import RichText from '@/components/RichText'
-import { Language, postsPageTranslations } from '@/hooks/languages/translations'
+import { getTranslation, postsPageTranslations } from '@/hooks/languages/translations'
+import { LocaleType } from '@/utilities/types'
 
 export const dynamic = 'force-static'
 export const revalidate = 600
 
 type Args = {
   params: Promise<{
-    lang: Language
+    lang: LocaleType
   }>
 }
 
@@ -30,7 +31,7 @@ export default async function Page({params: paramsPromise}: Args) {
   const { lang } =  await paramsPromise
   const payload = await getPayload({ config: configPromise })
 
-  const t = postsPageTranslations[lang]
+  const t = getTranslation(lang, postsPageTranslations)
 
   const posts = await payload.find({
     collection: 'posts',
@@ -69,7 +70,7 @@ export default async function Page({params: paramsPromise}: Args) {
       {/* <CollectionArchive posts={posts.docs} /> */}
       <div className="container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {posts.docs.map((post, i) => (
-          <Link href={`/${lang}/posts/${post.slug}`} key={i} className="">
+          <Link href={`/${lang}/posts/${post.slug}`} key={i}>
           <Card
             key={i}
             className="overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col h-full"
