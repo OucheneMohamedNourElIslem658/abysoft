@@ -8,6 +8,10 @@ import { ContentBlock } from '@/blocks/Content/Component'
 import { FormBlock } from '@/blocks/Form/Component'
 import { MediaBlock } from '@/blocks/MediaBlock/Component'
 import { FaqsBlock } from './FAQs/Component'
+import {FeatureBlock} from './Feature/Component'
+import {TabsBlock} from './Products/Component'
+import {TestimonialsBlock} from './Testimonials/Component'
+import {UniversitiesBlock} from './Universities/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -15,7 +19,12 @@ const blockComponents = {
   cta: CallToActionBlock,
   formBlock: FormBlock,
   mediaBlock: MediaBlock,
-  faqs: FaqsBlock
+  faqs: FaqsBlock,
+  section: FeatureBlock,
+  tabs: TabsBlock,
+  testimonial: TestimonialsBlock,
+  university: UniversitiesBlock,
+  
 }
 
 export const RenderBlocks: React.FC<{

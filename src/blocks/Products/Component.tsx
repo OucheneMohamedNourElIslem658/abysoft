@@ -1,81 +1,55 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import clsx from 'clsx'
 import React from 'react'
+import { TabsBlock as TabsBlockProps } from "@/payload-types"
+import RichText from '@/components/RichText'
+// import { blockComponents } from '../RenderBlocks'
+import { FeatureBlock } from '../Feature/Component'
+import { FaqsBlock } from '../FAQs/Component'
+import HeaderField from '@/components/HeaderField'
 
-const tabs = [
-    {
-        name: 'Overview',
-        content: "This is the overview tab. It contains general information about the component."
-    },
-    {
-        name: 'Documentation',
-        content: "The Tabs component is built with Radix UI and styled with Firebase design system."
-    },
-    {
-        name: 'Examples',
-        content: "Tabs are useful for organizing related content into separate views."
-    },
-]
+const blockComponents = {
+  
+  faqs: FaqsBlock,
+  section: FeatureBlock,
+}
 
-export default function ProductsBlock() {
+export const TabsBlock: React.FC<TabsBlockProps> = (tabsContainer) => {
+  // console.log('tabsContainer------------------')
+  // console.dir(tabsContainer.header, {depth: 4})
+
+  
   return (
     <section className="py-16">
 
       <div className="container flex flex-col gap-20">
 
-        {true ? 
-        
-          <div className="head flex flex-col items-center">
-              {true && 
-              <>
-                {'highlight' === 'highlight' 
-                ? 
-                  <div
-                  className={clsx(
-                      "rounded-full py-1 px-3 w-fit mb-5 text-sm font-semibold",
-                       "bg-gray-100 text-gray-800" // according to appearence
-                    )} 
-                  >
-                    Highlight
-                  </div>
-                : 
-                  <div className="bg-muted rounded-full px-2 border-border border-[1px] w-fit mb-5">
-                    <div className="flex justify-center items-center">
-                      {/* {summary.lastSigned.map((user: { name: string; img_url: string }) => (
-                        <div title={user.name} key={user.name} className="user-img w-8">
-                          <Image className="w-full h-full object-cover" src={user.img_url} alt="user" width={100} height={100} />
-                        </div>
-                      ))} */}
-                      <div className="ml-3 font-semibold text-sm">
-                        150+ <span className="text-muted-foreground"> satisfied clients</span>
-                      </div>
-                    </div>
-                  </div>
-                }
-              </>
-              }
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold max-w-2xl text-center">
-                This is the title of this professional section!
-              </h1>
-          </div>
-        : null}
+        <div className="flex justify-center">
+          {tabsContainer.header && <HeaderField className="[&>div]:flex [&>div]:flex-col text-center [&>div]:items-center" header={tabsContainer.header} />}
+        </div>
 
-        <Tabs defaultValue="overview" className="w-full flex flex-col items-center">
+        <Tabs defaultValue={tabsContainer.tabs?.[0].name.toLowerCase()} className="w-full flex flex-col items-center ">
             <TabsList>
                 {
-                    tabs.map((tab) => (
-                        <TabsTrigger key={tab.name} value={tab.name.toLowerCase()} className="px-6">
+                    tabsContainer.tabs?.map((tab, i) => (
+                        <TabsTrigger key={i} value={tab.name.toLowerCase()} className="px-6">
                             {tab.name}
                         </TabsTrigger>
                     ))
                 }
             </TabsList>
             {
-                tabs.map((tab) => (
-                    <TabsContent key={tab.name} value={tab.name.toLowerCase()} className="space-y-4 py-4">
-                        <p className="text-muted-foreground">
-                            {tab.content}
-                        </p>
+                tabsContainer.tabs?.map((tab, i) => (
+                    <TabsContent key={i} value={tab.name.toLowerCase()} className="rounded-3xl overflow-hidden">
+                      {tab.contentType === 'blocks' 
+                        ? (() => {
+                          const BlockComponent = blockComponents[tab.blocksContent[0].blockType];
+                          return <BlockComponent {...tab.blocksContent[0]} disableInnerContainer />;
+                        })()
+                        : <div className="p-10">
+                            <RichText enableGutter={false} data={tab.richTextContent} />
+                          </div>
+                      }
+                       
                     </TabsContent>
                 ))
             }

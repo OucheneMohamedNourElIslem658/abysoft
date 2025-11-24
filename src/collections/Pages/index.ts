@@ -21,6 +21,10 @@ import {
   OverviewField,
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
+import { Section } from '@/blocks/Feature/config'
+import { Tabs } from '@/blocks/Products/config'
+import { Testimonial } from '@/blocks/Testimonials/config'
+import { University } from '@/blocks/Universities/config'
 // import { FaqsBlock } from '@/blocks/FAQs/Component'
 
 export const Pages: CollectionConfig<'pages'> = {
@@ -74,7 +78,7 @@ export const Pages: CollectionConfig<'pages'> = {
             {
               name: 'layout',
               type: 'blocks',
-              blocks: [CallToAction, Content, MediaBlock, Archive, FormBlock, Faqs],
+              blocks: [CallToAction, Content, MediaBlock, Archive, FormBlock, Faqs, Section, Tabs, Testimonial, University],
               required: true,
               admin: {
                 initCollapsed: true,

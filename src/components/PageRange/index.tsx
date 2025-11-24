@@ -31,6 +31,7 @@ export const PageRange: React.FC<{
     limit,
     totalDocs,
   } = props
+  
 
   let indexStart = (currentPage ? currentPage - 1 : 1) * (limit || 1) + 1
   if (totalDocs && indexStart > totalDocs) indexStart = 0

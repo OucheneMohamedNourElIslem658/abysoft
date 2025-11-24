@@ -1,5 +1,7 @@
 // storage-adapter-import-placeholder
-import { sqliteAdapter } from '@payloadcms/db-sqlite'
+// import { sqliteAdapter } from '@payloadcms/db-sqlite'
+// import { postgresAdapter } from '@payloadcms/db-postgres'
+import { postgresAdapter  } from '@payloadcms/db-postgres'
 
 import sharp from 'sharp' // sharp-import
 import path from 'path'
@@ -11,11 +13,16 @@ import { Media } from './collections/Media'
 import { Pages } from './collections/Pages'
 import { Posts } from './collections/Posts'
 import { Users } from './collections/Users'
+import { Testimonials } from './collections/Testimonials'
 import { Footer } from './Footer/config'
 import { Header } from './Header/config'
 import { plugins } from './plugins'
 import { defaultLexical } from '@/fields/defaultLexical'
 import { getServerSideURL } from './utilities/getURL'
+
+import { s3Storage } from '@payloadcms/storage-s3'
+import { Universities } from './collections/Universities'
+import { Contact } from './Contact/config'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -59,35 +66,55 @@ export default buildConfig({
   },
   // This config helps us configure global or default features that the other editors can inherit
   editor: defaultLexical,
-  db: sqliteAdapter({
-    client: {
-      url: process.env.DATABASE_URI || '',
-    },
+  db: postgresAdapter ({
+    
+    // client: {
+    pool: {
+
+      connectionString: process.env.DATABASE_URI || '',
+    }
+    // },
   }),
-  collections: [Pages, Posts, Media, Categories, Users],
-//   localization: {
-//     locales: [
-//       {
-//         label: 'English',
-//         code: 'en',
-//       },
-//       {
-//         label: 'Français',
-//         code: 'fr',
-//       },
-//       {
-//         label: 'العربية',
-//         code: 'ar',
-//         rtl: true,
-//       },
-//     ],
-//     defaultLocale: 'en',
-//     fallback: true,
-//   },
+  collections: [Pages, Posts, Media, Categories, Users, Testimonials, Universities],
+  localization: {
+    locales: [
+      {
+        label: 'English',
+        code: 'en',
+      },
+      {
+        label: 'Français',
+        code: 'fr',
+      },
+      {
+        label: 'العربية',
+        code: 'ar',
+        rtl: true,
+      },
+    ],
+    defaultLocale: 'en',
+    fallback: true,
+  },
   cors: [getServerSideURL()].filter(Boolean),
-  globals: [Header, Footer],
+  globals: [Header, Footer, Contact],
   plugins: [
     ...plugins,
+    s3Storage({
+      collections: {
+        media: true
+      },
+      
+      bucket: process.env.S3_BUCKET!,
+      config: {
+        forcePathStyle: true, // Important for using Supabase
+        credentials: {
+          accessKeyId: process.env.S3_ACCESS_KEY_ID!,
+          secretAccessKey: process.env.S3_SECRET_ACCESS_KEY!,
+        },
+        region: process.env.S3_REGION!,
+        endpoint: process.env.S3_ENDPOINT!,
+      },
+    })
     // storage-adapter-placeholder
   ],
   secret: process.env.PAYLOAD_SECRET,
