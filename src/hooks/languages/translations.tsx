@@ -1,4 +1,5 @@
 import { LocaleType } from "@/utilities/types";
+import { auth } from "node_modules/payload/dist/auth/operations/auth";
 
 export type Translation = {
   [key: string]: string;
@@ -69,12 +70,18 @@ export const contactpageTranslations : Translations = {
 export const postsPageTranslations : Translations = {
   en: {
     title: "Posts",
+    meta: "Abysoft Blog",
+    relatedposts: "Related Posts",
   },
   ar: {
     title: "مقالات",
+    meta: "مدونة أبيسوفت",
+    relatedposts: "مقالات ذات صلة",
   },
   fr: {
     title: "Articles",
+    meta: "Blog Abysoft",
+    relatedposts: "Articles connexes",
   },
 
   all: {}
@@ -153,12 +160,15 @@ export const ragDrawerTranslatons : Translations = {
 export const mediumImpactTranslations : Translations = {
   en: {
     date: "Date Published",
+    author: "Author",
   },
   ar: {
     date: "تاريخ النشر",
+    author: "المؤلف",
   },
   fr: {
     date: "Date de publication",
+    author: "Auteur",
   },
 
   all: {},
