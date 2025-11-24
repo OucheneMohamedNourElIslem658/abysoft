@@ -68,7 +68,6 @@ export const TestimonialsBlock: React.FC<TestimonialBlockProps> = async (data) =
 
             <p className="mb-6 text-md text-muted-foreground">
               &quot;{testimonial.quote}&quot;
-              &quot;{testimonial.quote}&quot;
             </p>
 
             <div className="flex items-center gap-3">

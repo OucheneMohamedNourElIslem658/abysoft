@@ -23,6 +23,8 @@ interface AiDocumentationDrawerProps {
 export function AiDocumentationDrawer({ lang } : AiDocumentationDrawerProps) {
   const [open, setOpen] = useState(false)
   const t = getTranslation(lang, ragDrawerTranslatons)
+  console.log(t);
+  
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
