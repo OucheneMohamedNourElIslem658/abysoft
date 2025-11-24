@@ -54,7 +54,6 @@ export const PostHero: React.FC<{
               <div className="flex flex-col gap-4">
                 <div className="flex flex-col gap-1">
                   <p className="text-sm">{t.author}</p>
-
                   <p>{formatAuthors(populatedAuthors)}</p>
                 </div>
               </div>

@@ -70,12 +70,18 @@ export const contactpageTranslations : Translations = {
 export const postsPageTranslations : Translations = {
   en: {
     title: "Posts",
+    meta: "Abysoft Blog",
+    relatedposts: "Related Posts",
   },
   ar: {
     title: "مقالات",
+    meta: "مدونة أبيسوفت",
+    relatedposts: "مقالات ذات صلة",
   },
   fr: {
     title: "Articles",
+    meta: "Blog Abysoft",
+    relatedposts: "Articles connexes",
   },
 
   all: {}
