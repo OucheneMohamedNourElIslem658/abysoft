@@ -150,6 +150,20 @@ export const ragDrawerTranslatons : Translations = {
   all: {},
 }
 
+export const mediumImpactTranslations : Translations = {
+  en: {
+    date: "Date Published",
+  },
+  ar: {
+    date: "تاريخ النشر",
+  },
+  fr: {
+    date: "Date de publication",
+  },
+
+  all: {},
+}
+
 export const getTranslation = (lang: LocaleType, translations : Translations): Translation => {
   if (lang !== 'en' && lang !== 'ar' && lang !== 'fr') {
     lang = 'en';
