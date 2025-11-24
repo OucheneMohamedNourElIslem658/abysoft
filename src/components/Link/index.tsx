@@ -22,13 +22,7 @@ type CMSLinkType = {
   url?: string | null
 }
 
-function getLanguage(): string | null {
-  const match = document.cookie
-    .split("; ")
-    .find((row) => row.startsWith("lang="));
 
-  return match ? match.split("=")[1] : "en";
-}
 
 export const CMSLink: React.FC<CMSLinkType> = (props) => {
   const {
@@ -42,6 +36,14 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
     size: sizeFromProps,
     url,
   } = props
+
+  function getLanguage(): string | null {
+  const match = document.cookie
+    .split("; ")
+    .find((row) => row.startsWith("lang="));
+
+  return match ? match.split("=")[1] : "en";
+}
 
   const lang = getLanguage()
 
