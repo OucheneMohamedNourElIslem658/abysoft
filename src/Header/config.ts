@@ -38,6 +38,7 @@ export const Header: GlobalConfig = {
         {
           name: 'title',
           type: 'text',
+          localized: true,
           required: true,
           admin: {
             condition: (data, value) => value?.type === 'dropdown',
@@ -51,22 +52,8 @@ export const Header: GlobalConfig = {
             condition: (data) => !data?.type,
           },
           fields: [link({appearances: false})],
-          // hooks: {
-          //   beforeValidate: [
-          //     ({ data, value }) => {
-          //       // enforce max 1 link when type = 'link'
-          //       console.log('data, value', data, "-------------",value)
-          //       if (value?.type === 'link' && Array.isArray(value) && value.length > 1) {
-          //         throw new Error('Only one link is allowed when type is "Simple Link"')
-          //       }
-          //       return value
-          //     },
-          //   ],
-          // },
+          
         },
-        
-        
-        
       ],
       
     }

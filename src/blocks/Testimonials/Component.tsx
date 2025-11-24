@@ -31,7 +31,7 @@ export const TestimonialsBlock: React.FC<TestimonialBlockProps> = async (data) =
 
   const reviews = await getPopulatedTestimonials(data.testimonials as number[])
 
-  console.log('reviews', reviews)
+  // console.log('reviews', reviews)
 
   // console.log('testimonials', quoats)
   return (
@@ -67,6 +67,7 @@ export const TestimonialsBlock: React.FC<TestimonialBlockProps> = async (data) =
             </div> */}
 
             <p className="mb-6 text-md text-muted-foreground">
+              &quot;{testimonial.quote}&quot;
               &quot;{testimonial.quote}&quot;
             </p>
 

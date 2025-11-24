@@ -1,8 +1,13 @@
-// src/collections/Testimonials.ts
 import { CollectionConfig } from 'payload'
 
 export const Universities: CollectionConfig = {
   slug: 'universities',
+  // access: {
+  //   create: authenticated,
+  //   delete: authenticated,
+  //   read: anyone,
+  //   update: authenticated,
+  // },
   admin: {
     useAsTitle: 'name',
   },

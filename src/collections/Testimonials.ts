@@ -3,6 +3,12 @@ import { CollectionConfig } from 'payload'
 
 export const Testimonials: CollectionConfig = {
   slug: 'testimonials',
+  // access: {
+  //   create: authenticated,
+  //   delete: authenticated,
+  //   read: anyone,
+  //   update: authenticated,
+  // },
   admin: {
     useAsTitle: 'name',
   },

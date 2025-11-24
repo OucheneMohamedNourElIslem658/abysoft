@@ -263,35 +263,10 @@ export interface Page {
       }
     | {
         header: {
-          /**
-           * Optional text to appear above the title
-           */
-          span?:
-            | (
-                | {
-                    text: string;
-                    apperance: 'blue' | 'red' | 'green' | 'yellow' | 'purple';
-                    id?: string | null;
-                    blockName?: string | null;
-                    blockType: 'highlight';
-                  }
-                | {
-                    relation: (
-                      | {
-                          relationTo: 'categories';
-                          value: number | Category;
-                        }
-                      | {
-                          relationTo: 'users';
-                          value: number | User;
-                        }
-                    )[];
-                    id?: string | null;
-                    blockName?: string | null;
-                    blockType: 'relation';
-                  }
-              )[]
-            | null;
+          span: {
+            text: string;
+            apperance: 'blue' | 'red' | 'green' | 'yellow' | 'purple';
+          };
           title: string;
         };
         tabs?:
@@ -946,35 +921,10 @@ export interface Form {
  */
 export interface FaqsBlock {
   header: {
-    /**
-     * Optional text to appear above the title
-     */
-    span?:
-      | (
-          | {
-              text: string;
-              apperance: 'blue' | 'red' | 'green' | 'yellow' | 'purple';
-              id?: string | null;
-              blockName?: string | null;
-              blockType: 'highlight';
-            }
-          | {
-              relation: (
-                | {
-                    relationTo: 'categories';
-                    value: number | Category;
-                  }
-                | {
-                    relationTo: 'users';
-                    value: number | User;
-                  }
-              )[];
-              id?: string | null;
-              blockName?: string | null;
-              blockType: 'relation';
-            }
-        )[]
-      | null;
+    span: {
+      text: string;
+      apperance: 'blue' | 'red' | 'green' | 'yellow' | 'purple';
+    };
     title: string;
   };
   faqs?:
@@ -1008,35 +958,10 @@ export interface FaqsBlock {
  */
 export interface TestimonialBlock {
   header: {
-    /**
-     * Optional text to appear above the title
-     */
-    span?:
-      | (
-          | {
-              text: string;
-              apperance: 'blue' | 'red' | 'green' | 'yellow' | 'purple';
-              id?: string | null;
-              blockName?: string | null;
-              blockType: 'highlight';
-            }
-          | {
-              relation: (
-                | {
-                    relationTo: 'categories';
-                    value: number | Category;
-                  }
-                | {
-                    relationTo: 'users';
-                    value: number | User;
-                  }
-              )[];
-              id?: string | null;
-              blockName?: string | null;
-              blockType: 'relation';
-            }
-        )[]
-      | null;
+    span: {
+      text: string;
+      apperance: 'blue' | 'red' | 'green' | 'yellow' | 'purple';
+    };
     title: string;
   };
   testimonials?: (number | Testimonial)[] | null;
@@ -1063,35 +988,10 @@ export interface Testimonial {
  */
 export interface UniversityBlock {
   header: {
-    /**
-     * Optional text to appear above the title
-     */
-    span?:
-      | (
-          | {
-              text: string;
-              apperance: 'blue' | 'red' | 'green' | 'yellow' | 'purple';
-              id?: string | null;
-              blockName?: string | null;
-              blockType: 'highlight';
-            }
-          | {
-              relation: (
-                | {
-                    relationTo: 'categories';
-                    value: number | Category;
-                  }
-                | {
-                    relationTo: 'users';
-                    value: number | User;
-                  }
-              )[];
-              id?: string | null;
-              blockName?: string | null;
-              blockType: 'relation';
-            }
-        )[]
-      | null;
+    span: {
+      text: string;
+      apperance: 'blue' | 'red' | 'green' | 'yellow' | 'purple';
+    };
     title: string;
   };
   universities?: (number | University)[] | null;
@@ -1464,21 +1364,8 @@ export interface PagesSelect<T extends boolean = true> {
                     span?:
                       | T
                       | {
-                          highlight?:
-                            | T
-                            | {
-                                text?: T;
-                                apperance?: T;
-                                id?: T;
-                                blockName?: T;
-                              };
-                          relation?:
-                            | T
-                            | {
-                                relation?: T;
-                                id?: T;
-                                blockName?: T;
-                              };
+                          text?: T;
+                          apperance?: T;
                         };
                     title?: T;
                   };
@@ -1636,21 +1523,8 @@ export interface FaqsBlockSelect<T extends boolean = true> {
         span?:
           | T
           | {
-              highlight?:
-                | T
-                | {
-                    text?: T;
-                    apperance?: T;
-                    id?: T;
-                    blockName?: T;
-                  };
-              relation?:
-                | T
-                | {
-                    relation?: T;
-                    id?: T;
-                    blockName?: T;
-                  };
+              text?: T;
+              apperance?: T;
             };
         title?: T;
       };
@@ -1675,21 +1549,8 @@ export interface TestimonialBlockSelect<T extends boolean = true> {
         span?:
           | T
           | {
-              highlight?:
-                | T
-                | {
-                    text?: T;
-                    apperance?: T;
-                    id?: T;
-                    blockName?: T;
-                  };
-              relation?:
-                | T
-                | {
-                    relation?: T;
-                    id?: T;
-                    blockName?: T;
-                  };
+              text?: T;
+              apperance?: T;
             };
         title?: T;
       };
@@ -1708,21 +1569,8 @@ export interface UniversityBlockSelect<T extends boolean = true> {
         span?:
           | T
           | {
-              highlight?:
-                | T
-                | {
-                    text?: T;
-                    apperance?: T;
-                    id?: T;
-                    blockName?: T;
-                  };
-              relation?:
-                | T
-                | {
-                    relation?: T;
-                    id?: T;
-                    blockName?: T;
-                  };
+              text?: T;
+              apperance?: T;
             };
         title?: T;
       };
@@ -2272,6 +2120,10 @@ export interface Footer {
 export interface Contact {
   id: number;
   cover: number | Media;
+  phone: string;
+  email: string;
+  address: string;
+  timework: string;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -2342,6 +2194,10 @@ export interface FooterSelect<T extends boolean = true> {
  */
 export interface ContactSelect<T extends boolean = true> {
   cover?: T;
+  phone?: T;
+  email?: T;
+  address?: T;
+  timework?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
