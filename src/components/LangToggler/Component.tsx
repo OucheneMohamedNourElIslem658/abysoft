@@ -27,8 +27,12 @@ export function LangToggler() {
     const lang = pathSegments[0] || 'en'
     if (['en', 'ar', 'fr'].includes(lang)) {
       setValue(lang)
+      document.cookie = `lang=${lang}; path=/; max-age=31536000; SameSite=Lax`
+
     } else {
       setValue('en')
+      document.cookie = `lang=en; path=/; max-age=31536000; SameSite=Lax`
+
     }
   }, [pathname])
 

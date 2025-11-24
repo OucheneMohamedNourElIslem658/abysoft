@@ -6,16 +6,20 @@ import type { Post } from '@/payload-types'
 import { Media } from '@/components/Media'
 import { formatAuthors } from '@/utilities/formatAuthors'
 import { getTranslation, mediumImpactTranslations } from '@/hooks/languages/translations'
+import { getLanguage } from '@/utilities/getLanguage'
+import { LocaleType } from '@/utilities/types'
 
 export const PostHero: React.FC<{
   post: Post
-}> = ({ post }) => {
+}> = async ({ post }) => {
   const { categories, heroImage, populatedAuthors, publishedAt, title } = post
+  const lang = await getLanguage() as LocaleType
+  // console.log('lang------------------------------>', lang)
 
   const hasAuthors =
     populatedAuthors && populatedAuthors.length > 0 && formatAuthors(populatedAuthors) !== ''
 
-  const t = getTranslation('ar', mediumImpactTranslations)
+  const t = getTranslation(lang, mediumImpactTranslations)
 
   return (
     <div className="relative -mt-[10.4rem] flex items-end mb-10">
@@ -59,7 +63,7 @@ export const PostHero: React.FC<{
               <div className="flex flex-col gap-1">
                 <p className="text-sm">{t.date}</p>
 
-                <time dateTime={publishedAt}>{formatDateTimeLang(publishedAt, 'ar')}</time>
+                <time dateTime={publishedAt}>{formatDateTimeLang(publishedAt, lang)}</time>
               </div>
             )}
           </div>
