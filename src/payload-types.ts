@@ -232,10 +232,11 @@ export interface Page {
           };
           [k: string]: unknown;
         };
+        hasButton?: boolean | null;
         /**
          * Add a button or link for this section
          */
-        button: {
+        button?: {
           link: {
             type?: ('reference' | 'custom') | null;
             newTab?: boolean | null;
@@ -310,10 +311,11 @@ export interface Page {
                           };
                           [k: string]: unknown;
                         };
+                        hasButton?: boolean | null;
                         /**
                          * Add a button or link for this section
                          */
-                        button: {
+                        button?: {
                           link: {
                             type?: ('reference' | 'custom') | null;
                             newTab?: boolean | null;
@@ -1337,6 +1339,7 @@ export interface PagesSelect<T extends boolean = true> {
               label?: T;
               title?: T;
               paragraph?: T;
+              hasButton?: T;
               button?:
                 | T
                 | {
@@ -1386,6 +1389,7 @@ export interface PagesSelect<T extends boolean = true> {
                                 label?: T;
                                 title?: T;
                                 paragraph?: T;
+                                hasButton?: T;
                                 button?:
                                   | T
                                   | {

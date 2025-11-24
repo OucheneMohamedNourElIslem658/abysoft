@@ -13,34 +13,18 @@ export default function HeaderField({header, className}: {header: FaqsBlockProps
   return (
     <div className={clsx("head relative", className)}>
       <div className="sticky top-10 left-0">
-        {header.span && 
-        <>
-          {header.span[0].blockType === 'highlight' 
-          ? 
-            <div
-            className={clsx(
-                "rounded-full py-1 px-3 w-fit mb-5 text-sm font-semibold",
-                colorMap[header.span[0].apperance] ?? "bg-gray-100 text-gray-800"
-              )} 
-            >
-              {header.span[0].text}
-            </div>
-          : 
-            <div className="bg-muted rounded-full px-2 border-border border-[1px] w-fit mb-5">
-              <div className="flex justify-center items-center">
-                {/* {summary.lastSigned.map((user: { name: string; img_url: string }) => (
-                  <div title={user.name} key={user.name} className="user-img w-8">
-                    <Image className="w-full h-full object-cover" src={user.img_url} alt="user" width={100} height={100} />
-                  </div>
-                ))} */}
-                <div className="ml-3 font-semibold text-sm">
-                  150+ <span className="text-muted-foreground"> satisfied clients</span>
-                </div>
-              </div>
-            </div>
-          }
-        </>
-        }
+        
+        
+        <div
+        className={clsx(
+            "rounded-full py-1 px-3 w-fit mb-5 text-sm font-semibold",
+            colorMap[header.span.apperance] ?? "bg-gray-100 text-gray-800"
+          )} 
+        >
+          {header.span.text}
+        </div>
+         
+        
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold max-w-2xl">{header.title}</h1>
       </div>
     </div>

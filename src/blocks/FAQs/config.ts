@@ -23,12 +23,14 @@ export const Faqs: Block = {
           type: "text",
           required: true,
           label: "Question",
+          localized: true,
         },
         {
           name: "answer",
           type: "richText",
           required: true,
           label: "Answer",
+          localized: true,
           editor: lexicalEditor({
             features: ({ rootFeatures }) => {
               return [

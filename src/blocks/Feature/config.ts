@@ -35,15 +35,18 @@ export const Section: Block = {
       name: 'label',
       type: 'text',
       required: true,
+      localized: true,
     },
     {
       name: 'title',
       type: 'text',
       required: true,
+      localized: true,
     },
     {
       name: 'paragraph',
       type: 'richText',
+      localized: true,
       editor: lexicalEditor({
         features: ({ rootFeatures }) => {
           return [
@@ -59,15 +62,23 @@ export const Section: Block = {
       required: true,
       
     },
-
+    {
+      name: 'hasButton',
+      type: 'checkbox',
+      label: 'Add a button?',
+      defaultValue: false,
+    },
     // Button / Link
     {
       name: 'button',
       type: 'group',
-      fields: [link()],
+      required: false,
       admin: {
+        // Show only when hasButton is true
+        condition: (_, value) => Boolean(value.hasButton),
         description: 'Add a button or link for this section',
       },
+      fields: [link()],
     },
 
     // Background color
