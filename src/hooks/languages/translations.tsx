@@ -151,5 +151,8 @@ export const ragDrawerTranslatons : Translations = {
 }
 
 export const getTranslation = (lang: LocaleType, translations : Translations): Translation => {
-  return translations[lang || 'en'];
+  if (lang !== 'en' && lang !== 'ar' && lang !== 'fr') {
+    lang = 'en';
+  }
+  return translations[lang];
 }
