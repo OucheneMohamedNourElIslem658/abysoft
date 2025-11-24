@@ -3,6 +3,18 @@ import { Section } from '../Feature/config'
 import { Faqs } from '../FAQs/config'
 import { headerField } from '@/fields/headerField'
 
+import {
+  BlocksFeature,
+  FixedToolbarFeature,
+  HeadingFeature,
+  HorizontalRuleFeature,
+  InlineToolbarFeature,
+  lexicalEditor,
+} from '@payloadcms/richtext-lexical'
+import { Banner } from '@/blocks/Banner/config'
+import { Code } from '@/blocks/Code/config'
+import { MediaBlock } from '@/blocks/MediaBlock/config'
+
 export const Tabs: Block = {
   slug: 'tabs',
   labels: {
@@ -20,6 +32,7 @@ export const Tabs: Block = {
           name: 'name',
           type: 'text',
           required: true,
+          localized: true
         },
         {
           name: 'contentType',
@@ -38,7 +51,19 @@ export const Tabs: Block = {
           name: 'richTextContent',
           type: 'richText',
           required: false,
-         
+          localized: true,
+          editor: lexicalEditor({
+            features: ({ rootFeatures }) => {
+              return [
+                ...rootFeatures,
+                HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
+                BlocksFeature({ blocks: [Banner, Code, MediaBlock] }),
+                FixedToolbarFeature(),
+                InlineToolbarFeature(),
+                HorizontalRuleFeature(),
+              ]
+            },
+          }),
           admin: {
             condition: (_, value) => value?.contentType === 'richText',
           },
