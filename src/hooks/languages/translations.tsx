@@ -1,4 +1,5 @@
 import { LocaleType } from "@/utilities/types";
+import { auth } from "node_modules/payload/dist/auth/operations/auth";
 
 export type Translation = {
   [key: string]: string;
@@ -153,12 +154,15 @@ export const ragDrawerTranslatons : Translations = {
 export const mediumImpactTranslations : Translations = {
   en: {
     date: "Date Published",
+    author: "Author",
   },
   ar: {
     date: "تاريخ النشر",
+    author: "المؤلف",
   },
   fr: {
     date: "Date de publication",
+    author: "Auteur",
   },
 
   all: {},
